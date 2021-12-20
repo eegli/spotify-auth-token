@@ -2,4 +2,4 @@
 
 const { cli } = require('./dist/index.js');
 
-cli().catch(console.error);
+cli();

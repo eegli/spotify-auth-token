@@ -1,27 +1,26 @@
-// Spotify credentials file
-export type SpotifyCreds = {
+export type OptionalConfig = {
+  port: number;
+  scopes: string;
+};
+
+export type RequiredConfig = {
   client_id: string;
   client_secret: string;
 };
 
-// Returned from Spotify
-export type SpotifyToken = {
+export type CLIInputConfig = RequiredConfig & Partial<OptionalConfig>;
+export type Config = RequiredConfig & OptionalConfig;
+
+export type SpotifyTokenResponse = {
   access_token: string;
   token_type: 'Bearer';
   expires_in: number;
   refresh_token: string;
   scope: string;
+  date_obtained: string;
 };
 
-// For the local token server
-export type SpotifyTokenResponse = Omit<SpotifyCreds, 'scopes'> & {
+export type SpotifyAuthResponse = {
+  code: string;
   state: string;
-};
-export type SpotifyTokenSuccess = Partial<SpotifyToken> & {
-  dateObtained: string;
-};
-
-export type Config = Partial<SpotifyCreds> & {
-  port: number;
-  scopes: string;
 };
