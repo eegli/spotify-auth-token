@@ -13,3 +13,7 @@ export function read<T = any>(path: string): T {
 export function write(path: string, data: unknown): void {
   writeFileSync(path, JSON.stringify(data, null, 2));
 }
+
+export function id() {
+  return Math.random().toString(36).slice(2);
+}
