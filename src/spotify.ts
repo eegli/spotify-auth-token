@@ -1,13 +1,15 @@
-import type { Config, SpotifyTokenResponse } from './types';
+import type { SpotifyConfig, SpotifyTokenResponse } from './types';
 import { nanoid } from 'nanoid';
 import open from 'open';
 import fetch from 'node-fetch';
 import { createServerOnce } from './server';
 
-export const getSpotifyToken = async (parms: Config) => {
+export const getSpotifyToken = async (parms: SpotifyConfig) => {
   const { client_id, client_secret, port, scopes } = parms;
+
+  const redirectUri = `http://localhost:${port}`;
   const state = nanoid(12);
-  // const server = app.listen(port);
+
   const spotifyUrl =
     'https://accounts.spotify.com/authorize?' +
     new URLSearchParams({
@@ -15,7 +17,7 @@ export const getSpotifyToken = async (parms: Config) => {
       show_dialog: 'true',
       state: encodeURIComponent(state),
       client_id: encodeURIComponent(client_id),
-      redirect_uri: `http://localhost:${port}`,
+      redirect_uri: redirectUri,
       scope: encodeURIComponent(scopes),
     }).toString();
 
@@ -40,7 +42,7 @@ export const getSpotifyToken = async (parms: Config) => {
   const tokenParams = new URLSearchParams({
     grant_type: 'authorization_code',
     code: receivedCode,
-    redirect_uri: 'http://localhost:3000',
+    redirect_uri: redirectUri,
   });
 
   const token: SpotifyTokenResponse = await fetch(

@@ -3,13 +3,13 @@ export type OptionalConfig = {
   scopes: string;
 };
 
-export type RequiredConfig = {
+type RequiredConfig = {
   client_id: string;
   client_secret: string;
 };
 
 export type CLIInputConfig = RequiredConfig & Partial<OptionalConfig>;
-export type Config = RequiredConfig & OptionalConfig;
+export type SpotifyConfig = RequiredConfig & OptionalConfig;
 
 export type SpotifyTokenResponse = {
   access_token: string;
