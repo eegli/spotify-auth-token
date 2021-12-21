@@ -4,7 +4,9 @@ import open from 'open';
 import fetch from 'node-fetch';
 import { createServerOnce } from './server';
 
-export const getSpotifyToken = async (parms: SpotifyConfig) => {
+export const getSpotifyToken = async (
+  parms: SpotifyConfig
+): Promise<SpotifyTokenResponse> => {
   const { client_id, client_secret, port, scopes } = parms;
 
   const redirectUri = `http://localhost:${port}`;
@@ -25,8 +27,8 @@ export const getSpotifyToken = async (parms: SpotifyConfig) => {
 
   const authUrl = await createServerOnce(port, () => open(spotifyUrl));
   const params = new URLSearchParams(authUrl);
-  const receivedCode = params.get('code') || '';
-  const receivedState = params.get('state') || '';
+  const receivedCode = params.get('code');
+  const receivedState = params.get('state');
 
   if (receivedState !== state) {
     throw new Error('Received and original state do not match');
