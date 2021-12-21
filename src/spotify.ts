@@ -1,17 +1,13 @@
-import { Config, SpotifyAuthResponse, SpotifyTokenResponse } from './types';
-import express from 'express';
+import type { Config, SpotifyTokenResponse } from './types';
 import { nanoid } from 'nanoid';
 import open from 'open';
 import fetch from 'node-fetch';
-
-const app = express();
-app.use(express.json());
-const state = nanoid(12);
+import { createServerOnce } from './server';
 
 export const getSpotifyToken = async (parms: Config) => {
   const { client_id, client_secret, port, scopes } = parms;
-
-  const server = app.listen(port);
+  const state = nanoid(12);
+  // const server = app.listen(port);
   const spotifyUrl =
     'https://accounts.spotify.com/authorize?' +
     new URLSearchParams({
@@ -23,29 +19,27 @@ export const getSpotifyToken = async (parms: Config) => {
       scope: encodeURIComponent(scopes),
     }).toString();
 
-  await open(spotifyUrl);
-
   console.info('Please login with Spotify in the browser...');
 
-  const authResonse = await new Promise<SpotifyAuthResponse>(
-    (resolve, reject) => {
-      app.get('/', (req, res) => {
-        res.end('You can now close this window');
-        if (req.query.code && req.query.state === state) {
-          resolve(req.query as SpotifyAuthResponse);
-        } else {
-          reject('Something went wrong');
-        }
-        server.close();
-      });
-    }
-  );
+  const authUrl = await createServerOnce(port, () => open(spotifyUrl));
+  const params = new URLSearchParams(authUrl);
+  const receivedCode = params.get('code') || '';
+  const receivedState = params.get('state') || '';
+
+  if (receivedState !== state) {
+    throw new Error('Received and original state do not match');
+  }
+
+  if (!receivedCode) {
+    console.error(receivedCode);
+    throw new Error('No code received');
+  }
 
   console.info('Login successfull!');
 
   const tokenParams = new URLSearchParams({
     grant_type: 'authorization_code',
-    code: authResonse.code,
+    code: receivedCode,
     redirect_uri: 'http://localhost:3000',
   });
 

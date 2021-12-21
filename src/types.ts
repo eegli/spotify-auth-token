@@ -19,8 +19,3 @@ export type SpotifyTokenResponse = {
   scope: string;
   date_obtained: string;
 };
-
-export type SpotifyAuthResponse = {
-  code: string;
-  state: string;
-};
