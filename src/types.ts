@@ -10,7 +10,7 @@ type RequiredConfig = {
 };
 
 export type CLIInputConfig = RequiredConfig & Partial<OptionalConfig>;
-export type SpotifyConfig = RequiredConfig & OptionalConfig;
+export type AppConfig = RequiredConfig & OptionalConfig;
 
 export type SpotifyTokenResponse = {
   access_token: string;

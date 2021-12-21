@@ -1,49 +1,55 @@
 import { join } from 'path';
 import { defaultConfig } from './config';
 import { getLocalhostUrl, request } from './request';
-import type { CLIInputConfig, SpotifyTokenResponse } from './types';
+import type { AppConfig, CLIInputConfig, SpotifyTokenResponse } from './types';
 import { id, read, write } from './utils';
 
-export const cli = async (): Promise<void> => {
+export default async function cli(opts?: CLIInputConfig): Promise<void> {
   try {
-    const usrConfigFilePath = process.argv[2];
+    let config = {} as AppConfig;
 
-    if (!usrConfigFilePath) {
-      console.error('Error: No credentials file specified');
-      process.exit(1);
+    // Programmatic use
+    if (opts) {
+      config = Object.assign(defaultConfig, opts);
+
+      // CLI us
+    } else {
+      const usrConfigFilePath = process.argv[2];
+
+      if (!usrConfigFilePath) {
+        console.error('Error: No credentials file specified');
+        process.exit(1);
+      }
+
+      const userConfig: CLIInputConfig = read(
+        join(process.cwd(), usrConfigFilePath)
+      );
+
+      if (!userConfig.client_id || !userConfig.client_secret) {
+        console.error('Error: Invalid config file');
+        process.exit(1);
+      }
+      config = Object.assign(defaultConfig, userConfig);
     }
 
-    const userConfig: CLIInputConfig = read(
-      join(process.cwd(), usrConfigFilePath)
-    );
-
-    if (!userConfig.client_id || !userConfig.client_secret) {
-      console.error('Error: Invalid config file');
-      process.exit(1);
-    }
-
-    const { client_id, client_secret, port, scopes } = Object.assign(
-      defaultConfig,
-      userConfig
-    );
-
-    const redirectUri = `http://localhost:${port}`;
+    const redirectUri = `http://localhost:${config.port}`;
     const state = id();
+
     const spotifyUrl =
       'https://accounts.spotify.com/authorize?' +
       new URLSearchParams({
         response_type: 'code',
         show_dialog: 'true',
         state: encodeURIComponent(state),
-        client_id: encodeURIComponent(client_id),
+        client_id: encodeURIComponent(config.client_id),
         redirect_uri: redirectUri,
-        scope: encodeURIComponent(scopes),
+        scope: encodeURIComponent(config.scopes),
       }).toString();
 
     console.info('Please click the link to login to Spotify in the browser\n');
     console.info(spotifyUrl + '\n');
 
-    const authUrl = await getLocalhostUrl(port);
+    const authUrl = await getLocalhostUrl(config.port);
     const params = new URLSearchParams(authUrl);
     const receivedCode = params.get('code');
     const receivedState = params.get('state');
@@ -74,7 +80,9 @@ export const cli = async (): Promise<void> => {
           'Content-type': 'application/x-www-form-urlencoded',
           Authorization:
             'Basic ' +
-            Buffer.from(client_id + ':' + client_secret).toString('base64'),
+            Buffer.from(config.client_id + ':' + config.client_secret).toString(
+              'base64'
+            ),
         },
       },
       tokenRequestBody.toString()
@@ -82,7 +90,7 @@ export const cli = async (): Promise<void> => {
 
     token.date_obtained = new Date().toLocaleString();
 
-    write(join(process.cwd(), 'token.json'), token);
+    write(join(process.cwd(), `${config.outFileName}.json`), token);
 
     console.info('Saved Spotify access token');
     process.exit(0);
@@ -90,4 +98,4 @@ export const cli = async (): Promise<void> => {
     console.error('Something went wrong', e);
     process.exit(1);
   }
-};
+}
