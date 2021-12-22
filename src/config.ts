@@ -4,6 +4,5 @@ export const defaultConfig: OptionalConfig = {
   port: 3000,
   outDir: '',
   outFileName: 'spotify-token',
-  scopes:
-    'user-read-email user-top-read user-library-read user-read-recently-played',
+  scopes: 'user-read-email',
 };

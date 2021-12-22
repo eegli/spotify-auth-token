@@ -1,5 +1,25 @@
 {
   "name": "spotify-auth-token",
+  "description": "A simple CLI utility for retrieving Spotify authentication tokens. Can be used programmatically.",
+  "keywords": [
+    "spotify",
+    "auth",
+    "token",
+    "refresh token",
+    "cli"
+  ],
+  "homepage": "https://github.com/eegli/spotify-token",
+  "author": {
+    "name": "Eric Egli",
+    "email": "lx180777+npm@gmail.com"
+  },
+  "engines": {
+    "node": ">=10.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eegli/spotify-token.git"
+  },
   "version": "1.1.0",
   "license": "MIT",
   "bin": "cli.js",
