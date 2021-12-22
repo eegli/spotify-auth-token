@@ -29,6 +29,18 @@ npx spotify-auth-token --clientId f40c6b --clientSecret 0199f38a
 
 ## Programmatic use
 
+Installation:
+
+```bash
+yarn add -D spotify-auth-token
+```
+
+or
+
+```bash
+npm install spotify-auth-token --save-dev
+```
+
 Same options as for CLI:
 
 ```ts
