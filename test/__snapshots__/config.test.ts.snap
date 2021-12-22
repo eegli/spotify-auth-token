@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+Object {
+  "clientId": "cid",
+  "outDir": "",
+  "outFileName": "spotify-token",
+  "port": 3000,
+  "scopes": "user-read-email user-top-read user-library-read user-read-recently-played",
+}
+`;
+
+exports[`createConfig cli use: full input config 1`] = `
+Object {
+  "clientId": "cid",
+  "clientSecret": "cs",
+  "outDir": "/secrets",
+  "outFileName": "mytoken",
+  "port": 1000,
+  "scopes": "scopes",
+}
+`;
+
+exports[`createConfig cli use: minimum input config 1`] = `
+Object {
+  "clientId": "cid",
+  "clientSecret": "cs",
+  "outDir": "/secrets",
+  "outFileName": "mytoken",
+  "port": 1000,
+  "scopes": "scopes",
+}
+`;
+
+exports[`createConfig programmatic use: full input config 1`] = `
+Object {
+  "clientId": "cid",
+  "clientSecret": "cs",
+  "outDir": "/secrets",
+  "outFileName": "mytoken",
+  "port": 1000,
+  "scopes": "scopes",
+}
+`;
+
+exports[`createConfig programmatic use: minimum input config 1`] = `
+Object {
+  "clientId": "cid",
+  "clientSecret": "cs",
+  "outDir": "",
+  "outFileName": "spotify-token",
+  "port": 3000,
+  "scopes": "user-read-email user-top-read user-library-read user-read-recently-played",
+}
+`;

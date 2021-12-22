@@ -1,43 +1,16 @@
 import path from 'path';
-import { defaultConfig } from './config';
+import { createConfig } from './create-config';
 import { getLocalhostUrl, request } from './request';
-import type {
-  AuthConfig,
-  OptionalConfig,
-  RequiredConfig,
-  SpotifyTokenResponse,
-} from './types';
-import { id, read, write } from './utils';
+import type { SpotifyTokenResponse, UserConfig } from './types';
+import { id, write } from './utils';
 
-export type { AuthConfig };
+export type { UserConfig };
 
-export default async function run(opts: AuthConfig): Promise<void> {
+export default async function main(userConfig: UserConfig): Promise<void> {
   try {
-    let config = {} as RequiredConfig & OptionalConfig;
-
-    // Programmatic use
-    if (opts) {
-      config = Object.assign(defaultConfig, opts);
-
-      // CLI us
-    } else {
-      const usrConfigFilePath = process.argv[2];
-
-      if (!usrConfigFilePath) {
-        console.error('Error: No credentials file specified');
-        process.exit(1);
-      }
-
-      const userConfig: AuthConfig = read(
-        path.join(process.cwd(), usrConfigFilePath)
-      );
-
-      if (!userConfig.client_id || !userConfig.client_secret) {
-        console.error('Error: Invalid config file');
-        process.exit(1);
-      }
-      config = Object.assign(defaultConfig, userConfig);
-    }
+    const config = userConfig
+      ? createConfig(userConfig)
+      : createConfig(process.argv.slice(2));
 
     const redirectUri = `http://localhost:${config.port}`;
     const state = id();
@@ -48,7 +21,7 @@ export default async function run(opts: AuthConfig): Promise<void> {
         response_type: 'code',
         show_dialog: 'true',
         state: encodeURIComponent(state),
-        client_id: encodeURIComponent(config.client_id),
+        client_id: encodeURIComponent(config.clientId),
         redirect_uri: redirectUri,
         scope: encodeURIComponent(config.scopes),
       }).toString();
@@ -87,7 +60,7 @@ export default async function run(opts: AuthConfig): Promise<void> {
           'Content-type': 'application/x-www-form-urlencoded',
           Authorization:
             'Basic ' +
-            Buffer.from(config.client_id + ':' + config.client_secret).toString(
+            Buffer.from(config.clientId + ':' + config.clientSecret).toString(
               'base64'
             ),
         },
@@ -98,9 +71,7 @@ export default async function run(opts: AuthConfig): Promise<void> {
     token.date_obtained = new Date().toLocaleString();
     const outDir = path.join(process.cwd(), path.normalize(config.outDir));
     write(outDir, config.outFileName, token);
-
     console.info('Saved Spotify access token');
-    process.exit(0);
   } catch (e) {
     console.error('Something went wrong', e);
     process.exit(1);

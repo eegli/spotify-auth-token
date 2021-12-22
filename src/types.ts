@@ -6,11 +6,12 @@ export type OptionalConfig = {
 };
 
 export type RequiredConfig = {
-  client_id: string;
-  client_secret: string;
+  clientId: string;
+  clientSecret: string;
 };
 
-export type AuthConfig = RequiredConfig & Partial<OptionalConfig>;
+export type UserConfig = RequiredConfig & Partial<OptionalConfig>;
+export type AppConfig = RequiredConfig & OptionalConfig;
 
 export type SpotifyTokenResponse = {
   access_token: string;

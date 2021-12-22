@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main returns: console output 1`] = `
+Array [
+  Array [
+    "Please click the link to login to Spotify in the browser
+",
+  ],
+  Array [
+    "https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=1234&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A69&scope=user-read-email%2520user-top-read%2520user-library-read%2520user-read-recently-played
+",
+  ],
+  Array [
+    "Login successfull!",
+  ],
+  Array [
+    "Saved Spotify access token",
+  ],
+]
+`;
+
+exports[`Main returns: request 1`] = `
+Array [
+  Array [
+    Object {
+      "headers": Object {
+        "Authorization": "Basic Y2lkOmNz",
+        "Content-type": "application/x-www-form-urlencoded",
+      },
+      "hostname": "accounts.spotify.com",
+      "method": "POST",
+      "path": "/api/token",
+    },
+    "grant_type=authorization_code&code=AQDKHwNyRapw&redirect_uri=http%3A%2F%2Flocalhost%3A69",
+  ],
+]
+`;
+
+exports[`Main returns: write 1`] = `
+Array [
+  Array [
+    "C:\\\\github\\\\spotify-token\\\\out\\\\token",
+    "mytoken",
+    Object {
+      "access_token": "BQC2fMYf9",
+      "date_obtained": "21/04/1996, 00:00:00",
+      "expires_in": 3600,
+      "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
+      "scope": "user-library-read",
+      "token_type": "Bearer",
+    },
+  ],
+]
+`;
