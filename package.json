@@ -1,15 +1,20 @@
 {
-  "name": "@eegli/spotify-token",
+  "name": "spotify-auth-token",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
-  "bin": {
-    "spotify-token": "cli.js"
-  },
+  "bin": "cli.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/*",
+    "cli.js"
+  ],
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsc --build --clean && tsc --build",
-    "format": "prettier --write src"
+    "build": "tsc --build",
+    "prebuild": "rm -rf dist",
+    "format": "prettier --write src",
+    "prepare": "yarn build"
   },
   "devDependencies": {
     "@types/node": "^17.0.1",

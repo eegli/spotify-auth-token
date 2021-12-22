@@ -1,10 +1,10 @@
-import { join } from 'path';
+import path from 'path';
 import { defaultConfig } from './config';
 import { getLocalhostUrl, request } from './request';
 import type { AppConfig, CLIInputConfig, SpotifyTokenResponse } from './types';
 import { id, read, write } from './utils';
 
-export default async function cli(opts?: CLIInputConfig): Promise<void> {
+export default async function run(opts: CLIInputConfig): Promise<void> {
   try {
     let config = {} as AppConfig;
 
@@ -22,7 +22,7 @@ export default async function cli(opts?: CLIInputConfig): Promise<void> {
       }
 
       const userConfig: CLIInputConfig = read(
-        join(process.cwd(), usrConfigFilePath)
+        path.join(process.cwd(), usrConfigFilePath)
       );
 
       if (!userConfig.client_id || !userConfig.client_secret) {
@@ -89,8 +89,8 @@ export default async function cli(opts?: CLIInputConfig): Promise<void> {
     );
 
     token.date_obtained = new Date().toLocaleString();
-
-    write(join(process.cwd(), `${config.outFileName}.json`), token);
+    const outDir = path.join(process.cwd(), path.normalize(config.outDir));
+    write(outDir, config.outFileName, token);
 
     console.info('Saved Spotify access token');
     process.exit(0);

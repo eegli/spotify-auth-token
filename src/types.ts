@@ -2,6 +2,7 @@ export type OptionalConfig = {
   port: number;
   scopes: string;
   outFileName: string;
+  outDir: string;
 };
 
 type RequiredConfig = {
