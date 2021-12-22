@@ -8,6 +8,8 @@
 
 Implements the authorization code flow according to the [Spotify docs](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/).
 
+This thing was mainly developed to simplify my [Spotify history scrobbler](https://github.com/eegli/spotify-history).
+
 ## CLI
 
 The simplest way to get a token is via `npx` - no installation required.
@@ -18,14 +20,14 @@ npx spotify-auth-token --clientId f40c6b --clientSecret 0199f38a
 
 ### CLI options
 
-| Flag           | Required                          | Description                     |
-| -------------- | --------------------------------- | ------------------------------- |
-| `clientId`     | ✅                                | Spotify client id               |
-| `clientSecret` | ✅                                | Spotify client secret           |
-| `port`         | ❌ - default: `3000`              | Port for localhost redirect url |
-| `scopes`       | ❌ - default: `'user-read-email'` | Auth scopes                     |
-| `outDir`       | ❌ - default: `process.cwd()`     | Custom output directory         |
-| `outFileName`  | ❌ - default: `'spotify-token'`   | Custom file name for the token  |
+| Option           | Required                          | Description                     |
+| ---------------- | --------------------------------- | ------------------------------- |
+| `--clientId`     | ✅                                | Spotify client id               |
+| `--clientSecret` | ✅                                | Spotify client secret           |
+| `--port`         | ❌ - default: `3000`              | Port for localhost redirect url |
+| `--scopes`       | ❌ - default: `'user-read-email'` | Auth scopes                     |
+| `--outDir`       | ❌ - default: `process.cwd()`     | Custom output directory         |
+| `--outFileName`  | ❌ - default: `'spotify-token'`   | Custom file name for the token  |
 
 ## Programmatic use
 
