@@ -1,12 +1,19 @@
 import path from 'path';
 import { defaultConfig } from './config';
 import { getLocalhostUrl, request } from './request';
-import type { AppConfig, CLIInputConfig, SpotifyTokenResponse } from './types';
+import type {
+  AuthConfig,
+  OptionalConfig,
+  RequiredConfig,
+  SpotifyTokenResponse,
+} from './types';
 import { id, read, write } from './utils';
 
-export default async function run(opts: CLIInputConfig): Promise<void> {
+export type { AuthConfig };
+
+export default async function run(opts: AuthConfig): Promise<void> {
   try {
-    let config = {} as AppConfig;
+    let config = {} as RequiredConfig & OptionalConfig;
 
     // Programmatic use
     if (opts) {
@@ -21,7 +28,7 @@ export default async function run(opts: CLIInputConfig): Promise<void> {
         process.exit(1);
       }
 
-      const userConfig: CLIInputConfig = read(
+      const userConfig: AuthConfig = read(
         path.join(process.cwd(), usrConfigFilePath)
       );
 

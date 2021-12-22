@@ -5,13 +5,12 @@ export type OptionalConfig = {
   outDir: string;
 };
 
-type RequiredConfig = {
+export type RequiredConfig = {
   client_id: string;
   client_secret: string;
 };
 
-export type CLIInputConfig = RequiredConfig & Partial<OptionalConfig>;
-export type AppConfig = RequiredConfig & OptionalConfig;
+export type AuthConfig = RequiredConfig & Partial<OptionalConfig>;
 
 export type SpotifyTokenResponse = {
   access_token: string;
