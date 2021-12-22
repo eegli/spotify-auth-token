@@ -3,7 +3,7 @@ secrets
 
 # Build output
 
-
+dist
 .webpack
 browser
 
