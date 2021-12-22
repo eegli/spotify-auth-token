@@ -56,10 +56,10 @@ type Options = {
 };
 ```
 
-Examples for vanilla JS and Typescript:
+Javascript example:
 
 ```js
-const spotifyToken = require('spotify-auth-token');
+const spotifyToken = require('spotify-auth-token').default;
 
 const config = {
   clientId: 'clientId',
@@ -72,6 +72,8 @@ const config = {
 
 await spotifyToken(config);
 ```
+
+Typescript example:
 
 ```ts
 import spotifyToken, { UserConfig } from 'spotify-auth-token';
