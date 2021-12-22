@@ -20,7 +20,7 @@
     "type": "git",
     "url": "https://github.com/eegli/spotify-token.git"
   },
-  "version": "1.1.0",
+  "version": "1.2.0",
   "license": "MIT",
   "bin": "cli.js",
   "main": "dist/index.js",
