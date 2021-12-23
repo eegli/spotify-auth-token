@@ -27,7 +27,8 @@
   "types": "dist/types/index.d.ts",
   "files": [
     "dist",
-    "cli.js"
+    "cli.js",
+    "readme.md"
   ],
   "scripts": {
     "dev": "tsc --watch",
