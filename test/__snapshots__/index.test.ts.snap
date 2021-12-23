@@ -7,7 +7,7 @@ Array [
 ",
   ],
   Array [
-    "https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=1234&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A69&scope=user-read-email%2520user-top-read%2520user-library-read%2520user-read-recently-played
+    "https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=1234&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A69&scope=user-read-email
 ",
   ],
   Array [

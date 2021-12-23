@@ -1,5 +1,5 @@
-import { UserConfig } from '.';
 import { defaultConfig } from './config';
+import { UserConfig } from './index';
 import { AppConfig } from './types';
 
 function isNumeric(value: string) {

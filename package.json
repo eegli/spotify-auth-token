@@ -14,7 +14,7 @@
     "email": "lx180777+npm@gmail.com"
   },
   "engines": {
-    "node": ">=10.3.0"
+    "node": ">=12.11.0"
   },
   "repository": {
     "type": "git",
@@ -23,8 +23,8 @@
   "version": "1.2.2",
   "license": "MIT",
   "bin": "cli.js",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist",
     "cli.js"

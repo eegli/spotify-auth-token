@@ -6,7 +6,7 @@ Object {
   "outDir": "",
   "outFileName": "spotify-token",
   "port": 3000,
-  "scopes": "user-read-email user-top-read user-library-read user-read-recently-played",
+  "scopes": "user-read-email",
 }
 `;
 
@@ -50,6 +50,6 @@ Object {
   "outDir": "",
   "outFileName": "spotify-token",
   "port": 3000,
-  "scopes": "user-read-email user-top-read user-library-read user-read-recently-played",
+  "scopes": "user-read-email",
 }
 `;
