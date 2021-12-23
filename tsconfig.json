@@ -1,11 +1,15 @@
 {
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
-    "target": "es6",
     "lib": ["ESNext", "DOM"],
     "sourceMap": true,
+    "module": "commonjs",
+    "outDir": "dist/cjs",
+    "target": "es2015",
     "declaration": true,
+    "declarationDir": "dist/types",
     "removeComments": true,
+    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
