@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-const cli = require('./dist').default;
+const cli = require('./dist');
 
 cli();
