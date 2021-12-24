@@ -28,6 +28,11 @@ export const createConfig = (
 
   const config = defaultConfig as AppConfig;
 
+  if (!cliArgs.clientId || !cliArgs.clientSecret) {
+    console.error('Error: Missing client id or client secret');
+    process.exit(1);
+  }
+
   if (typeof cliArgs.clientId === 'string') {
     config.clientId = cliArgs.clientId;
   }
