@@ -6,7 +6,8 @@
     "auth",
     "token",
     "refresh token",
-    "cli"
+    "cli",
+    "typescript"
   ],
   "homepage": "https://github.com/eegli/spotify-auth-token",
   "author": {
