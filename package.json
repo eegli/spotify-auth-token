@@ -37,6 +37,7 @@
     "prebuild": "rm -rf dist",
     "format": "prettier --write src",
     "prepare": "yarn build",
+    "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
