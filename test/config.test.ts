@@ -18,13 +18,13 @@ describe('createConfig', () => {
   });
   it('cli use', () => {
     expect(
-      createConfig(['--clientId', 'cid', '--client_secret', 'cs'])
+      createConfig(['--clientId', 'cid', '--clientSecret', 'cs'])
     ).toMatchSnapshot('minimum input config');
     expect(
       createConfig([
         '--clientId',
         'cid',
-        '-client_secret',
+        '--clientSecret',
         'cs',
         '--port',
         '1000',
@@ -36,8 +36,15 @@ describe('createConfig', () => {
         'mytoken',
       ])
     ).toMatchSnapshot('full input config');
+    expect(
+      createConfig([
+        '--clientId',
+        'cid',
+        '--clientSecret',
+        'cs',
+        'port',
+        '4000',
+      ])
+    ).toMatchSnapshot('ignores invalid args');
   });
-  expect(
-    createConfig(['--clientId', 'cid', '-client_secret', 'cs', 'port', '4000'])
-  ).toMatchSnapshot('ignores invalid args');
 });

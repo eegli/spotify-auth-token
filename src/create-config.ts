@@ -26,12 +26,13 @@ export const createConfig = (
     return acc;
   }, {} as Record<string, string | number>);
 
-  const config = defaultConfig as AppConfig;
-
+  // TODO tests
   if (!cliArgs.clientId || !cliArgs.clientSecret) {
     console.error('Error: Missing client id or client secret');
     process.exit(1);
   }
+
+  const config = defaultConfig as AppConfig;
 
   if (typeof cliArgs.clientId === 'string') {
     config.clientId = cliArgs.clientId;

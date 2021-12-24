@@ -1,16 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
+exports[`createConfig cli use: full input config 1`] = `
 Object {
   "clientId": "cid",
-  "outDir": "",
-  "outFileName": "spotify-token",
-  "port": 3000,
-  "scopes": "user-read-email",
+  "clientSecret": "cs",
+  "outDir": "/secrets",
+  "outFileName": "mytoken",
+  "port": 1000,
+  "scopes": "scopes",
 }
 `;
 
-exports[`createConfig cli use: full input config 1`] = `
+exports[`createConfig cli use: ignores invalid args 1`] = `
 Object {
   "clientId": "cid",
   "clientSecret": "cs",
