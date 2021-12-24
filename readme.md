@@ -4,11 +4,11 @@
 
 - CLI and programmatic use
 - Lightweight
-- TS support
+- TS and ESM support
 
 Implements the authorization code flow according to the [Spotify docs](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/).
 
-This thing was mainly developed to simplify my [Spotify history scrobbler](https://github.com/eegli/spotify-history).
+This helper was mainly developed to simplify my [Spotify history scrobbler](https://github.com/eegli/spotify-history).
 
 ## CLI
 
@@ -20,18 +20,18 @@ npx spotify-auth-token --clientId f40c6b --clientSecret 0199f38a
 
 ### CLI options
 
-| Option           | Required                          | Description                     |
-| ---------------- | --------------------------------- | ------------------------------- |
-| `--clientId`     | ✅                                | Spotify client id               |
-| `--clientSecret` | ✅                                | Spotify client secret           |
-| `--port`         | ❌ - default: `3000`              | Port for localhost redirect url |
-| `--scopes`       | ❌ - default: `'user-read-email'` | Auth scopes                     |
-| `--outDir`       | ❌ - default: `process.cwd()`     | Custom output directory         |
-| `--outFileName`  | ❌ - default: `'spotify-token'`   | Custom file name for the token  |
+| Option           | Required                          | Description                                                                                             |
+| ---------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `--clientId`     | ✅                                | Spotify client id                                                                                       |
+| `--clientSecret` | ✅                                | Spotify client secret                                                                                   |
+| `--port`         | ❌ - default: `3000`              | Port for localhost redirect url                                                                         |
+| `--scopes`       | ❌ - default: `'user-read-email'` | [Spotify auth scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/) |
+| `--outDir`       | ❌ - default: `process.cwd()`     | Custom output directory                                                                                 |
+| `--outFileName`  | ❌ - default: `'spotify-token'`   | Custom file name for the token                                                                          |
 
-## Programmatic use
+## Programmatic
 
-Installation:
+### Installation
 
 ```bash
 yarn add -D spotify-auth-token
@@ -43,37 +43,56 @@ or
 npm install spotify-auth-token --save-dev
 ```
 
-Same options as for CLI:
+### Options
+
+The options and defaults are the same as for the CLI:
 
 ```ts
 type Options = {
   clientId: string;
   clientSecret: string;
-  port: number;
-  scopes: string;
-  outFileName: string;
-  outDir: string;
+  port?: number;
+  scopes?: string;
+  outFileName?: string;
+  outDir?: string;
 };
 ```
 
-Javascript example:
+### Examples
+
+- CommonJS with JSDoc type hints
 
 ```js
-const spotifyToken = require('spotify-auth-token').default;
+/** @type {import('spotify-auth-token').default} */
+const auth = require('spotify-auth-token');
 
-const config = {
+auth({
   clientId: 'clientId',
   clientSecret: 'clientSecret',
   port: 3000,
   outDir: '',
   outFileName: 'spotify-token',
   scopes: 'user-read-email',
-};
-
-await spotifyToken(config);
+});
 ```
 
-Typescript example:
+- ES Modules with JSDoc type hints
+
+```js
+/** @type {import('spotify-auth-token').default} */
+import auth from 'spotify-auth-token';
+
+auth({
+  clientId: 'clientId',
+  clientSecret: 'clientSecret',
+  port: 3000,
+  outDir: '',
+  outFileName: 'spotify-token',
+  scopes: 'user-read-email',
+});
+```
+
+- TypeScript
 
 ```ts
 import spotifyToken, { UserConfig } from 'spotify-auth-token';
@@ -87,5 +106,5 @@ const config: UserConfig = {
   scopes: 'user-read-email',
 };
 
-await spotifyToken(config);
+spotifyToken(config);
 ```
