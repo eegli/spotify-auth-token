@@ -15,7 +15,7 @@ This helper was mainly developed to simplify my [Spotify history scrobbler](http
 The simplest way to get a token is via `npx` - no installation required.
 
 ```bash
-npx spotify-auth-token --clientId f40c6b --clientSecret 0199f38a
+npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a
 ```
 
 ### CLI options
