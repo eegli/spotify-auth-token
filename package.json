@@ -6,7 +6,8 @@
     "auth",
     "token",
     "refresh token",
-    "cli"
+    "cli",
+    "typescript"
   ],
   "homepage": "https://github.com/eegli/spotify-auth-token",
   "author": {
@@ -23,8 +24,8 @@
   "version": "1.2.3",
   "license": "MIT",
   "bin": "cli.js",
-  "main": "dist/cjs/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "cli.js",
@@ -36,6 +37,7 @@
     "prebuild": "rm -rf dist",
     "format": "prettier --write src",
     "prepare": "yarn build",
+    "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
