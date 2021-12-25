@@ -7,22 +7,22 @@ function isNumeric(value: string) {
   return /^\d+$/.test(value);
 }
 
-export const createConfig = (
-  configOrArgs: UserConfig | string[]
-): AppConfig => {
+export const createConfig = (args: UserConfig | string[]): AppConfig => {
   let config: Record<string, string | number> = {};
+
   // CLI use
-  if (Array.isArray(configOrArgs)) {
-    config = configOrArgs.reduce((acc, curr, idx, orig) => {
+  if (Array.isArray(args)) {
+    config = args.reduce((acc, curr, idx, orig) => {
       if (curr.startsWith('--')) {
         const key = curr.slice(2);
         acc[key] = orig[idx + 1];
       }
       return acc;
     }, config);
+
     // Programmatic use
   } else {
-    config = configOrArgs;
+    config = args;
   }
   if (!config.clientId || !config.clientSecret) {
     goodBye('Error: Missing client id or client secret');
