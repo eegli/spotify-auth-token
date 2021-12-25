@@ -72,6 +72,5 @@ export async function main(userConfig: UserConfig): Promise<void> {
     console.info('Saved Spotify access token');
   } catch (e) {
     console.error('Something went wrong', e);
-    process.exit(1);
   }
 }

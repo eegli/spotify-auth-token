@@ -1,9 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createConfig cli use: full input config 1`] = `
+exports[`createConfig, cli use works #0 1`] = `
 Object {
-  "clientId": "cid",
-  "clientSecret": "cs",
+  "clientId": "111",
+  "clientSecret": "111",
+  "outDir": "",
+  "outFileName": "spotify-token",
+  "port": 3000,
+  "scopes": "user-read-email",
+}
+`;
+
+exports[`createConfig, cli use works #1 1`] = `
+Object {
+  "clientId": "333",
+  "clientSecret": "333",
+  "outDir": "",
+  "outFileName": "spotify-token",
+  "port": 4000,
+  "scopes": "user-read-email",
+}
+`;
+
+exports[`createConfig, cli use works #2 1`] = `
+Object {
+  "clientId": "222",
+  "clientSecret": "222",
   "outDir": "/secrets",
   "outFileName": "mytoken",
   "port": 1000,
@@ -11,40 +33,7 @@ Object {
 }
 `;
 
-exports[`createConfig cli use: ignores invalid args 1`] = `
-Object {
-  "clientId": "cid",
-  "clientSecret": "cs",
-  "outDir": "/secrets",
-  "outFileName": "mytoken",
-  "port": 1000,
-  "scopes": "scopes",
-}
-`;
-
-exports[`createConfig cli use: minimum input config 1`] = `
-Object {
-  "clientId": "cid",
-  "clientSecret": "cs",
-  "outDir": "/secrets",
-  "outFileName": "mytoken",
-  "port": 1000,
-  "scopes": "scopes",
-}
-`;
-
-exports[`createConfig programmatic use: full input config 1`] = `
-Object {
-  "clientId": "cid",
-  "clientSecret": "cs",
-  "outDir": "/secrets",
-  "outFileName": "mytoken",
-  "port": 1000,
-  "scopes": "scopes",
-}
-`;
-
-exports[`createConfig programmatic use: minimum input config 1`] = `
+exports[`createConfig, programmatic use works #0 1`] = `
 Object {
   "clientId": "cid",
   "clientSecret": "cs",
@@ -52,5 +41,16 @@ Object {
   "outFileName": "spotify-token",
   "port": 3000,
   "scopes": "user-read-email",
+}
+`;
+
+exports[`createConfig, programmatic use works #1 1`] = `
+Object {
+  "clientId": "cid",
+  "clientSecret": "cs",
+  "outDir": "/secrets",
+  "outFileName": "mytoken",
+  "port": 1000,
+  "scopes": "scopes",
 }
 `;

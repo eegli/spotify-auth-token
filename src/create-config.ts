@@ -1,6 +1,7 @@
 import { defaultConfig } from './config';
 import { UserConfig } from './index';
 import { AppConfig } from './types';
+import { goodBye } from './utils';
 
 function isNumeric(value: string) {
   return /^\d+$/.test(value);
@@ -9,49 +10,28 @@ function isNumeric(value: string) {
 export const createConfig = (
   configOrArgs: UserConfig | string[]
 ): AppConfig => {
-  // Programmatic use
-  if (!Array.isArray(configOrArgs)) {
-    return Object.assign(defaultConfig, configOrArgs);
-  }
-
+  let config: Record<string, string | number> = {};
   // CLI use
-  const cliArgs = configOrArgs.reduce((acc, curr, idx, orig) => {
-    if (curr.startsWith('--')) {
-      const key = curr.slice(2);
-      let value: string | number = orig[idx + 1];
-      // Convert to number
-      if (isNumeric(value)) value = +value;
-      acc[key] = value;
-    }
-    return acc;
-  }, {} as Record<string, string | number>);
-
-  // TODO tests
-  if (!cliArgs.clientId || !cliArgs.clientSecret) {
-    console.error('Error: Missing client id or client secret');
-    process.exit(1);
+  if (Array.isArray(configOrArgs)) {
+    config = configOrArgs.reduce((acc, curr, idx, orig) => {
+      if (curr.startsWith('--')) {
+        const key = curr.slice(2);
+        acc[key] = orig[idx + 1];
+      }
+      return acc;
+    }, config);
+    // Programmatic use
+  } else {
+    config = configOrArgs;
+  }
+  if (!config.clientId || !config.clientSecret) {
+    goodBye('Error: Missing client id or client secret');
   }
 
-  const config = defaultConfig as AppConfig;
-
-  if (typeof cliArgs.clientId === 'string') {
-    config.clientId = cliArgs.clientId;
-  }
-  if (typeof cliArgs.clientSecret === 'string') {
-    config.clientSecret = cliArgs.clientSecret;
-  }
-  if (typeof cliArgs.port === 'number') {
-    config.port = cliArgs.port;
-  }
-  if (typeof cliArgs.scopes === 'string') {
-    config.scopes = cliArgs.scopes;
-  }
-  if (typeof cliArgs.outFileName === 'string') {
-    config.outFileName = cliArgs.outFileName;
-  }
-  if (typeof cliArgs.outDir === 'string') {
-    config.outDir = cliArgs.outDir;
+  if (typeof config.port === 'string') {
+    // Convert to number
+    config.port = +config.port;
   }
 
-  return config;
+  return { ...defaultConfig, ...config } as AppConfig;
 };
