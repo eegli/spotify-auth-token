@@ -2,7 +2,7 @@ import path from 'path';
 import { createConfig } from './create-config';
 import { getLocalhostUrl, request } from './request';
 import type { SpotifyTokenResponse, UserConfig } from './types';
-import { id, write } from './utils';
+import { goodBye, id, write } from './utils';
 
 export async function main(userConfig: UserConfig): Promise<void> {
   try {
@@ -33,12 +33,11 @@ export async function main(userConfig: UserConfig): Promise<void> {
     const receivedState = params.get('state');
 
     if (receivedState !== state) {
-      throw new Error('Received and original state do not match');
+      goodBye('Received and original state do not match');
     }
 
     if (!receivedCode) {
-      console.error(receivedCode);
-      throw new Error('No code received');
+      goodBye('No code received');
     }
 
     console.info('Login successfull!');
@@ -71,6 +70,6 @@ export async function main(userConfig: UserConfig): Promise<void> {
     write(outDir, config.outFileName, token);
     console.info('Saved Spotify access token');
   } catch (e) {
-    console.error('Something went wrong', e);
+    goodBye('Something went wrong: ' + e);
   }
 }
