@@ -9,6 +9,11 @@ export function write(path: string, fileName: string, data: unknown): void {
   writeFileSync(path, JSON.stringify(data, null, 2));
 }
 
-export function id() {
+export function id(): string {
   return Math.random().toString(36).slice(2);
+}
+
+export function goodBye(message: string): never {
+  console.error('\x1b[31m', `Error: ${message}. Goodbye`, '\x1b[0m');
+  process.exit(1);
 }
