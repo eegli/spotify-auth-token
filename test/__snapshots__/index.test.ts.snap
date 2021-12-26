@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main returns: console output 1`] = `
+exports[`App gets token: console output 1`] = `
 Array [
   Array [
     "Please click the link to login to Spotify in the browser
@@ -19,7 +19,7 @@ Array [
 ]
 `;
 
-exports[`Main returns: request 1`] = `
+exports[`App gets token: request 1`] = `
 Array [
   Array [
     Object {
@@ -36,7 +36,7 @@ Array [
 ]
 `;
 
-exports[`Main returns: write 1`] = `
+exports[`App gets token: write 1`] = `
 Array [
   Array [
     "C:\\\\github\\\\spotify-token\\\\out\\\\token",

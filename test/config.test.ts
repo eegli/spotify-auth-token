@@ -43,6 +43,7 @@ describe('createConfig, cli use', () => {
   [
     ['--clientId', '111', '--clientSecret', '111'],
     ['--clientId', '333', '--clientSecret', '333', '--port', '4000'],
+    ['--clientId', '777', '--clientSecret', '888', '--random', 'nothing'],
     [
       '--clientId',
       '222',

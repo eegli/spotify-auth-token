@@ -24,6 +24,17 @@ Object {
 
 exports[`createConfig, cli use works #2 1`] = `
 Object {
+  "clientId": "777",
+  "clientSecret": "888",
+  "outDir": "",
+  "outFileName": "spotify-token",
+  "port": 3000,
+  "scopes": "user-read-email",
+}
+`;
+
+exports[`createConfig, cli use works #3 1`] = `
+Object {
   "clientId": "222",
   "clientSecret": "222",
   "outDir": "/secrets",

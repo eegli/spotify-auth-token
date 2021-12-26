@@ -3,26 +3,34 @@ import { UserConfig } from './index';
 import { AppConfig } from './types';
 import { goodBye } from './utils';
 
-function isNumeric(value: string) {
-  return /^\d+$/.test(value);
+function hasOwnProperty<
+  T extends Record<PropertyKey, unknown>,
+  K extends PropertyKey
+>(obj: T, prop: K): obj is T & Record<K, unknown> {
+  return obj.hasOwnProperty(prop);
 }
 
 export const createConfig = (args: UserConfig | string[]): AppConfig => {
-  let config: Record<string, string | number> = {};
+  const config: AppConfig = { ...defaultConfig };
 
   // CLI use
   if (Array.isArray(args)) {
-    config = args.reduce((acc, curr, idx, orig) => {
-      if (curr.startsWith('--')) {
-        const key = curr.slice(2);
-        acc[key] = orig[idx + 1];
+    args.forEach((val, idx, orig) => {
+      if (val.startsWith('--')) {
+        const key = val.slice(2);
+        if (hasOwnProperty(config, key)) {
+          config[key] = orig[idx + 1];
+        }
       }
-      return acc;
-    }, config);
+    });
 
     // Programmatic use
   } else {
-    config = args;
+    Object.entries(args).forEach(([key, val]) => {
+      if (hasOwnProperty(config, key)) {
+        config[key] = val;
+      }
+    });
   }
   if (!config.clientId || !config.clientSecret) {
     goodBye('Error: Missing client id or client secret');
@@ -33,5 +41,5 @@ export const createConfig = (args: UserConfig | string[]): AppConfig => {
     config.port = +config.port;
   }
 
-  return { ...defaultConfig, ...config } as AppConfig;
+  return config;
 };

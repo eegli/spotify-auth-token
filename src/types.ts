@@ -1,11 +1,11 @@
-export type OptionalConfig = {
+type OptionalConfig = {
   port: number;
   scopes: string;
   outFileName: string;
   outDir: string;
 };
 
-export type RequiredConfig = {
+type RequiredConfig = {
   clientId: string;
   clientSecret: string;
 };

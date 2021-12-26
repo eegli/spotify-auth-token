@@ -1,4 +1,4 @@
-import main, { UserConfig } from '../src/index';
+import auth, { UserConfig } from '../src/index';
 import * as request from '../src/request';
 import * as utils from '../src/utils';
 
@@ -35,9 +35,9 @@ const config: UserConfig = {
   outFileName: 'mytoken',
 };
 
-describe('Main', () => {
-  it('returns', async () => {
-    await main(config);
+describe('App', () => {
+  it('gets token', async () => {
+    await auth(config);
     expect(spies.consoleInfo.mock.calls).toMatchSnapshot('console output');
     expect(spies.localhost).toHaveBeenCalledWith(config.port);
     expect(spies.request.mock.calls).toMatchSnapshot('request');
