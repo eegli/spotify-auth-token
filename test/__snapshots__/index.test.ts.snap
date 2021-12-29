@@ -5,7 +5,15 @@ exports[`App works with config 0: config 0, auth url 1`] = `
 "
 `;
 
-exports[`App works with config 0: config 0, out dir 1`] = `"\\\\usr\\\\dir\\\\out\\\\token\\\\mytoken.json"`;
+exports[`App works with config 0: config 0, out dir 1`] = `
+Array [
+  "usr",
+  "dir",
+  "out",
+  "token",
+  "mytoken.json",
+]
+`;
 
 exports[`App works with config 0: config 0, spotify request 1`] = `
 Object {
@@ -35,7 +43,15 @@ exports[`App works with config 1: config 1, auth url 1`] = `
 "
 `;
 
-exports[`App works with config 1: config 1, out dir 1`] = `"\\\\usr\\\\dir\\\\out\\\\token\\\\spotify-token.json"`;
+exports[`App works with config 1: config 1, out dir 1`] = `
+Array [
+  "usr",
+  "dir",
+  "out",
+  "token",
+  "spotify-token.json",
+]
+`;
 
 exports[`App works with config 1: config 1, spotify request 1`] = `
 Object {
@@ -65,7 +81,14 @@ exports[`App works with config 2: config 2, auth url 1`] = `
 "
 `;
 
-exports[`App works with config 2: config 2, out dir 1`] = `"\\\\usr\\\\dir\\\\out\\\\spotify-token.json.json"`;
+exports[`App works with config 2: config 2, out dir 1`] = `
+Array [
+  "usr",
+  "dir",
+  "out",
+  "spotify-token.json.json",
+]
+`;
 
 exports[`App works with config 2: config 2, spotify request 1`] = `
 Object {

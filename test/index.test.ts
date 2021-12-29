@@ -9,14 +9,14 @@ jest.useFakeTimers('modern').setSystemTime(new Date(1996, 3, 21));
 const mockId = '1234';
 
 jest.spyOn(utils, 'id').mockReturnValue(mockId);
-jest.spyOn(utils, 'goodBye').mockImplementation(() => null as never);
+
 const writeFileSpy = jest
   .spyOn(fs, 'writeFileSync')
-  .mockImplementation(jest.fn);
+  .mockImplementation(() => null);
 
 const consoleInfoSpy = jest
   .spyOn(global.console, 'info')
-  .mockImplementation(jest.fn);
+  .mockImplementation(() => null);
 
 const localhostSpy = jest
   .spyOn(request, 'getLocalhostUrl')
@@ -69,6 +69,7 @@ describe('App', () => {
   testConfigs.forEach((config, idx) => {
     it(`works with config ${idx}`, async () => {
       await auth(config);
+
       expect(consoleInfoSpy.mock.calls[1][0]).toMatchSnapshot(
         `config ${idx}, auth url`
       );
@@ -76,9 +77,9 @@ describe('App', () => {
       expect(requestSpy.mock.calls[0][0]).toMatchSnapshot(
         `config ${idx}, spotify request`
       );
-      expect(writeFileSpy.mock.calls[0][0]).toMatchSnapshot(
-        `config ${idx}, out dir`
-      );
+      const str = writeFileSpy.mock.calls[0][0] as string;
+      const filePath = str.replace(/\\|\//g, ',').split(',').filter(Boolean);
+      expect(filePath).toMatchSnapshot(`config ${idx}, out dir`);
       expect(
         JSON.parse(writeFileSpy.mock.calls[0][1] as string)
       ).toMatchSnapshot(`config ${idx}, written data`);
