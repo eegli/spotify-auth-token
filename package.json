@@ -33,7 +33,7 @@
     "readme.md"
   ],
   "scripts": {
-    "ci": "yarn install --ignore-optional",
+    "ci": "yarn",
     "dev": "tsc --watch",
     "build": "tsc --build",
     "prebuild": "rm -rf dist",
