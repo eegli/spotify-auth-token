@@ -15,7 +15,7 @@
     "email": "lx180777+npm@gmail.com"
   },
   "engines": {
-    "node": ">=12.11.0"
+    "node": ">=12"
   },
   "repository": {
     "type": "git",

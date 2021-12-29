@@ -65,7 +65,7 @@ export async function authorize(userConfig: UserConfig): Promise<void> {
       tokenRequestBody.toString()
     );
 
-    token.date_obtained = new Date().toLocaleString();
+    token.date_obtained = new Date().toUTCString();
     const outDir = path.join(process.cwd(), path.normalize(config.outDir));
     write(outDir, config.outFileName, token);
     console.info('Saved Spotify access token');

@@ -22,7 +22,7 @@ Object {
 exports[`App works with config 0: config 0, written data 1`] = `
 Object {
   "access_token": "BQC2fMYf9",
-  "date_obtained": "21/04/1996, 00:00:00",
+  "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
   "expires_in": 3600,
   "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
   "scope": "user-library-read",
@@ -52,7 +52,7 @@ Object {
 exports[`App works with config 1: config 1, written data 1`] = `
 Object {
   "access_token": "BQC2fMYf9",
-  "date_obtained": "21/04/1996, 00:00:00",
+  "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
   "expires_in": 3600,
   "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
   "scope": "user-library-read",
@@ -82,7 +82,7 @@ Object {
 exports[`App works with config 2: config 2, written data 1`] = `
 Object {
   "access_token": "BQC2fMYf9",
-  "date_obtained": "21/04/1996, 00:00:00",
+  "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
   "expires_in": 3600,
   "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
   "scope": "user-library-read",
