@@ -1,7 +1,6 @@
-import { main } from './spotify';
+import { authorize } from './authorize';
 
 export type { UserConfig } from './types';
-export default main;
+export default authorize;
 
-// Support ESM and CJS
-module.exports = main;
+module.exports = authorize;

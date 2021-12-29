@@ -1,4 +1,4 @@
-import { createConfig } from '../src/create-config';
+import { createConfig } from '../src/config';
 
 const exitSpy = jest
   .spyOn(process, 'exit')
@@ -16,7 +16,7 @@ describe('createConfig, programmatic use', () => {
       clientSecret: 'cs',
       port: 1000,
       scopes: 'scopes',
-      outDir: '/secrets',
+      outDir: 'secrets',
       outFileName: 'mytoken',
     },
   ].forEach((config, idx) => {
@@ -54,7 +54,7 @@ describe('createConfig, cli use', () => {
       '--scopes',
       'scopes',
       '--outDir',
-      '/secrets',
+      'secrets/spotify',
       '--outFileName',
       'mytoken',
     ],

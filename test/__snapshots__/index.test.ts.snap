@@ -1,54 +1,91 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App gets token: console output 1`] = `
-Array [
-  Array [
-    "Please click the link to login to Spotify in the browser
-",
-  ],
-  Array [
-    "https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=1234&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A69&scope=user-read-email
-",
-  ],
-  Array [
-    "Login successfull!",
-  ],
-  Array [
-    "Saved Spotify access token",
-  ],
-]
+exports[`App works with config 0: config 0, auth url 1`] = `
+"https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=1234&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A1&scope=scopes1%252Cscropes2
+"
 `;
 
-exports[`App gets token: request 1`] = `
-Array [
-  Array [
-    Object {
-      "headers": Object {
-        "Authorization": "Basic Y2lkOmNz",
-        "Content-type": "application/x-www-form-urlencoded",
-      },
-      "hostname": "accounts.spotify.com",
-      "method": "POST",
-      "path": "/api/token",
-    },
-    "grant_type=authorization_code&code=AQDKHwNyRapw&redirect_uri=http%3A%2F%2Flocalhost%3A69",
-  ],
-]
+exports[`App works with config 0: config 0, out dir 1`] = `"\\\\usr\\\\dir\\\\out\\\\token\\\\mytoken.json"`;
+
+exports[`App works with config 0: config 0, spotify request 1`] = `
+Object {
+  "headers": Object {
+    "Authorization": "Basic Y2lkOmNz",
+    "Content-type": "application/x-www-form-urlencoded",
+  },
+  "hostname": "accounts.spotify.com",
+  "method": "POST",
+  "path": "/api/token",
+}
 `;
 
-exports[`App gets token: write 1`] = `
-Array [
-  Array [
-    "C:\\\\github\\\\spotify-token\\\\out\\\\token",
-    "mytoken",
-    Object {
-      "access_token": "BQC2fMYf9",
-      "date_obtained": "21/04/1996, 00:00:00",
-      "expires_in": 3600,
-      "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
-      "scope": "user-library-read",
-      "token_type": "Bearer",
-    },
-  ],
-]
+exports[`App works with config 0: config 0, written data 1`] = `
+Object {
+  "access_token": "BQC2fMYf9",
+  "date_obtained": "21/04/1996, 00:00:00",
+  "expires_in": 3600,
+  "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
+  "scope": "user-library-read",
+  "token_type": "Bearer",
+}
+`;
+
+exports[`App works with config 1: config 1, auth url 1`] = `
+"https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=1234&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A59&scope=scopes1
+"
+`;
+
+exports[`App works with config 1: config 1, out dir 1`] = `"\\\\usr\\\\dir\\\\out\\\\token\\\\spotify-token.json"`;
+
+exports[`App works with config 1: config 1, spotify request 1`] = `
+Object {
+  "headers": Object {
+    "Authorization": "Basic Y2lkOmNz",
+    "Content-type": "application/x-www-form-urlencoded",
+  },
+  "hostname": "accounts.spotify.com",
+  "method": "POST",
+  "path": "/api/token",
+}
+`;
+
+exports[`App works with config 1: config 1, written data 1`] = `
+Object {
+  "access_token": "BQC2fMYf9",
+  "date_obtained": "21/04/1996, 00:00:00",
+  "expires_in": 3600,
+  "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
+  "scope": "user-library-read",
+  "token_type": "Bearer",
+}
+`;
+
+exports[`App works with config 2: config 2, auth url 1`] = `
+"https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=1234&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A69&scope=scropes2
+"
+`;
+
+exports[`App works with config 2: config 2, out dir 1`] = `"\\\\usr\\\\dir\\\\out\\\\spotify-token.json.json"`;
+
+exports[`App works with config 2: config 2, spotify request 1`] = `
+Object {
+  "headers": Object {
+    "Authorization": "Basic Y2lkOmNz",
+    "Content-type": "application/x-www-form-urlencoded",
+  },
+  "hostname": "accounts.spotify.com",
+  "method": "POST",
+  "path": "/api/token",
+}
+`;
+
+exports[`App works with config 2: config 2, written data 1`] = `
+Object {
+  "access_token": "BQC2fMYf9",
+  "date_obtained": "21/04/1996, 00:00:00",
+  "expires_in": 3600,
+  "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
+  "scope": "user-library-read",
+  "token_type": "Bearer",
+}
 `;

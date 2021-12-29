@@ -1,6 +1,13 @@
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
+export function hasOwnProperty<
+  T extends Record<PropertyKey, unknown>,
+  K extends PropertyKey
+>(obj: T, prop: K): obj is T & Record<K, unknown> {
+  return obj.hasOwnProperty(prop);
+}
+
 export function write(path: string, fileName: string, data: unknown): void {
   if (!existsSync(path)) {
     mkdirSync(path, { recursive: true });

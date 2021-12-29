@@ -1,10 +1,10 @@
 import path from 'path';
-import { createConfig } from './create-config';
+import { createConfig } from './config';
 import { getLocalhostUrl, request } from './request';
 import type { SpotifyTokenResponse, UserConfig } from './types';
 import { goodBye, id, write } from './utils';
 
-export async function main(userConfig: UserConfig): Promise<void> {
+export async function authorize(userConfig: UserConfig): Promise<void> {
   try {
     const config = userConfig
       ? createConfig(userConfig)
