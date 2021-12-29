@@ -4,7 +4,9 @@ import * as request from '../src/request';
 import { AppConfig } from '../src/types';
 import * as utils from '../src/utils';
 
-jest.useFakeTimers('modern').setSystemTime(new Date(1996, 3, 21));
+jest
+  .useFakeTimers('modern')
+  .setSystemTime(new Date('1996-04-20T22:00:00.000Z'));
 
 const mockId = '1234';
 
