@@ -1,7 +1,6 @@
 import { createConfig } from '../src/config';
 
 const exitSpy = jest.spyOn(process, 'exit').mockImplementation(() => {
-  console.log('bye');
   return undefined as never;
 });
 
