@@ -1,13 +1,5 @@
 import { createConfig } from '../src/config';
 
-const exitSpy = jest.spyOn(process, 'exit').mockImplementation(() => {
-  return undefined as never;
-});
-
-beforeEach(() => {
-  exitSpy.mockClear();
-});
-
 describe('createConfig, programmatic use', () => {
   [
     { clientId: 'cid', clientSecret: 'cs' },
@@ -32,9 +24,10 @@ describe('createConfig, programmatic use', () => {
     },
   ].forEach((config, idx) => {
     it(`fails #${idx}`, () => {
-      // @ts-expect-error
-      createConfig(config);
-      expect(exitSpy).toHaveBeenCalledTimes(1);
+      expect(() => {
+        // @ts-expect-error
+        createConfig(config);
+      }).toThrow();
     });
   });
 });
@@ -68,8 +61,9 @@ describe('createConfig, cli use', () => {
     ['--clientSecret', 'cs'],
   ].forEach((config, idx) => {
     it(`fails #${idx}`, () => {
-      createConfig(config);
-      expect(exitSpy).toHaveBeenCalledTimes(1);
+      expect(() => {
+        createConfig(config);
+      }).toThrow();
     });
   });
 });
