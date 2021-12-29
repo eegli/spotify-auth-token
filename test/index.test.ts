@@ -9,17 +9,21 @@ jest.useFakeTimers('modern').setSystemTime(new Date(1996, 3, 21));
 const mockId = '1234';
 
 jest.spyOn(utils, 'id').mockReturnValue(mockId);
+jest.spyOn(utils, 'goodBye').mockImplementation(() => null as never);
 const writeFileSpy = jest
   .spyOn(fs, 'writeFileSync')
   .mockImplementation(jest.fn);
+
 const consoleInfoSpy = jest
   .spyOn(global.console, 'info')
   .mockImplementation(jest.fn);
+
 const localhostSpy = jest
   .spyOn(request, 'getLocalhostUrl')
   .mockImplementation(() => {
     return Promise.resolve(`?code=AQDKHwNyRapw&state=${mockId}`);
   });
+
 const requestSpy = jest.spyOn(request, 'request').mockImplementation(() => {
   return Promise.resolve({
     access_token: 'BQC2fMYf9',
