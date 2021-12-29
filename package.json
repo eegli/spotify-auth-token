@@ -33,6 +33,7 @@
     "readme.md"
   ],
   "scripts": {
+    "ci": "yarn install --frozen-lockfile --ignore-optional",
     "dev": "tsc --watch",
     "build": "tsc --build",
     "prebuild": "rm -rf dist",
