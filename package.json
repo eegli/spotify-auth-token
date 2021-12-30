@@ -21,7 +21,7 @@
     "type": "git",
     "url": "https://github.com/eegli/spotify-auth-token.git"
   },
-  "version": "2.1.1",
+  "version": "3.0.0",
   "type": "commonjs",
   "license": "MIT",
   "bin": "cli.js",
