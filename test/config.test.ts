@@ -1,9 +1,5 @@
 import { createConfig } from '../src/config';
 
-jest.spyOn(process, 'exit').mockImplementation((number) => {
-  throw new Error('process.exit: ' + number);
-});
-
 describe('createConfig, programmatic use', () => {
   [
     { clientId: 'cid', clientSecret: 'cs' },

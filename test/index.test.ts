@@ -1,40 +1,6 @@
-import fs from 'fs';
 import auth from '../src/index';
-import * as request from '../src/request';
 import { AppConfig } from '../src/types';
-import * as utils from '../src/utils';
-
-jest
-  .useFakeTimers('modern')
-  .setSystemTime(new Date('1996-04-20T22:00:00.000Z'));
-
-const mockId = '1234';
-
-jest.spyOn(utils, 'id').mockReturnValue(mockId);
-
-const writeFileSpy = jest
-  .spyOn(fs, 'writeFileSync')
-  .mockImplementation(() => null);
-
-const consoleInfoSpy = jest
-  .spyOn(global.console, 'info')
-  .mockImplementation(() => null);
-
-const localhostSpy = jest
-  .spyOn(request, 'getLocalhostUrl')
-  .mockImplementation(() => {
-    return Promise.resolve(`?code=AQDKHwNyRapw&state=${mockId}`);
-  });
-
-const requestSpy = jest.spyOn(request, 'request').mockImplementation(() => {
-  return Promise.resolve({
-    access_token: 'BQC2fMYf9',
-    token_type: 'Bearer',
-    expires_in: 3600,
-    refresh_token: 'OFuVRQAzVzq0Wy_Py_W4KiMr8H0',
-    scope: 'user-library-read',
-  });
-});
+import { consoleInfoSpy, mockedFs, mockedRequest } from './setup';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -75,15 +41,15 @@ describe('App', () => {
       expect(consoleInfoSpy.mock.calls[1][0]).toMatchSnapshot(
         `config ${idx}, auth url`
       );
-      expect(localhostSpy).toHaveBeenCalledWith(config.port);
-      expect(requestSpy.mock.calls[0][0]).toMatchSnapshot(
+      expect(mockedRequest.getLocalhostUrl).toHaveBeenCalledWith(config.port);
+      expect(mockedRequest.request.mock.calls[0][0]).toMatchSnapshot(
         `config ${idx}, spotify request`
       );
-      const str = writeFileSpy.mock.calls[0][0] as string;
+      const str = mockedFs.writeFileSync.mock.calls[0][0] as string;
       const filePath = str.replace(/\\|\//g, ',').split(',').filter(Boolean);
       expect(filePath).toMatchSnapshot(`config ${idx}, out dir`);
       expect(
-        JSON.parse(writeFileSpy.mock.calls[0][1] as string)
+        JSON.parse(mockedFs.writeFileSync.mock.calls[0][1] as string)
       ).toMatchSnapshot(`config ${idx}, written data`);
     });
   });
