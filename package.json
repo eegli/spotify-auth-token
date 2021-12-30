@@ -33,13 +33,12 @@
     "readme.md"
   ],
   "scripts": {
-    "install:ci": "yarn install --ignore-scripts --ignore-optional --frozen-lockfile",
+    "install:ci": "yarn install --ignore-optional --frozen-lockfile",
     "dev": "tsc --watch",
     "build": "tsc --build",
     "prebuild": "rm -rf dist",
     "format": "prettier --write src",
     "test": "jest",
-    "test:ci": "jest --verbose --maxWorkers 2",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },

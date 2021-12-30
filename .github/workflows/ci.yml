@@ -18,4 +18,4 @@ jobs:
       - name: Install dependencies
         run: yarn install:ci
       - name: Run tests
-        run: yarn test:ci
+        run: yarn test --verbose
