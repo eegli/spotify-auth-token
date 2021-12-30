@@ -5,9 +5,14 @@ jest
   .useFakeTimers('modern')
   .setSystemTime(new Date('1996-04-20T22:00:00.000Z'));
 
+jest.mock('fs');
+jest.mock('../src/request');
+
 jest.spyOn(process, 'cwd').mockImplementation(() => '/usr/dir');
 
-jest.spyOn(global.console, 'error').mockImplementation(jest.fn()); // Math.random().toString(36).slice(2) now returns ou8n1fu8n1
+jest.spyOn(global.console, 'error').mockImplementation(jest.fn());
+
+// Math.random().toString(36).slice(2) now returns "ou8n1fu8n1"
 jest.spyOn(Math, 'random').mockReturnValue(0.69);
 
 export const consoleInfoSpy = jest
@@ -19,8 +24,6 @@ export const exitSpy = jest
     throw new Error('process.exit: ' + number);
   });
 
-jest.mock('fs');
-jest.mock('../src/request');
 export const mockedFs = fs as jest.Mocked<typeof fs>;
 export const mockedRequest = request as jest.Mocked<typeof request>;
 

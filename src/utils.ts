@@ -12,7 +12,10 @@ export function write(path: string, fileName: string, data: unknown): void {
   if (!existsSync(path)) {
     mkdirSync(path, { recursive: true });
   }
-  path = join(path, fileName + '.json');
+  if (!fileName.endsWith('.json')) {
+    fileName += '.json';
+  }
+  path = join(path, fileName);
   writeFileSync(path, JSON.stringify(data, null, 2));
 }
 

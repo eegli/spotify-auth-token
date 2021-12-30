@@ -1,3 +1,4 @@
+import path from 'path';
 import auth from '../src/index';
 import { AppConfig } from '../src/types';
 import { consoleInfoSpy, mockedFs, mockedRequest } from './setup';
@@ -12,7 +13,7 @@ describe('App', () => {
       clientId: 'cid',
       clientSecret: 'cs',
       port: 1,
-      outDir: 'out/token',
+      outDir: 'out/token/',
       outFileName: 'mytoken',
       scopes: 'scopes1,scropes2',
     },
@@ -21,7 +22,7 @@ describe('App', () => {
       clientSecret: 'cs',
       port: 59,
       outDir: '/out/token/',
-      outFileName: 'spotify-token',
+      outFileName: 'token',
       scopes: 'scopes1',
     },
     {
@@ -45,9 +46,10 @@ describe('App', () => {
       expect(mockedRequest.request.mock.calls[0][0]).toMatchSnapshot(
         `config ${idx}, spotify request`
       );
-      const str = mockedFs.writeFileSync.mock.calls[0][0] as string;
-      const filePath = str.replace(/\\|\//g, ',').split(',').filter(Boolean);
-      expect(filePath).toMatchSnapshot(`config ${idx}, out dir`);
+      const outDirPath = (
+        mockedFs.writeFileSync.mock.calls[0][0] as string
+      ).replace(/\\|\//gi, '/');
+      expect(path.parse(outDirPath)).toMatchSnapshot(`config ${idx}, out dir`);
       expect(
         JSON.parse(mockedFs.writeFileSync.mock.calls[0][1] as string)
       ).toMatchSnapshot(`config ${idx}, written data`);
