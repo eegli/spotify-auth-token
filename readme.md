@@ -26,7 +26,7 @@ npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a
 | `--clientSecret` | ✅                                | Spotify client secret                                                                                   |
 | `--port`         | ❌ - default: `3000`              | Port for localhost redirect url                                                                         |
 | `--scopes`       | ❌ - default: `'user-read-email'` | [Spotify auth scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/) |
-| `--outDir`       | ❌ - default: `process.cwd()`     | Custom output directory                                                                                 |
+| `--outDir`       | ❌ - default: `process.cwd()`     | Custom output directory relative to the current directory                                               |
 | `--outFileName`  | ❌ - default: `'spotify-token'`   | Custom file name for the token                                                                          |
 
 ## Programmatic
@@ -60,34 +60,29 @@ type Options = {
 
 ### Examples
 
-- CommonJS with JSDoc type hints
+- CommonJS (with JSDoc type hints)
 
 ```js
 /** @type {import('spotify-auth-token').default} */
-const auth = require('spotify-auth-token');
+import authorize from 'spotify-auth-token';
 
-auth({
+authorize({
   clientId: 'clientId',
   clientSecret: 'clientSecret',
   port: 3000,
-  outDir: '',
-  outFileName: 'spotify-token',
   scopes: 'user-read-email',
 });
 ```
 
-- ES Modules with JSDoc type hints
+- ES Modules
 
 ```js
-/** @type {import('spotify-auth-token').default} */
-import auth from 'spotify-auth-token';
+import authorize from 'spotify-auth-token';
 
-auth({
+authorize({
   clientId: 'clientId',
   clientSecret: 'clientSecret',
   port: 3000,
-  outDir: '',
-  outFileName: 'spotify-token',
   scopes: 'user-read-email',
 });
 ```
@@ -95,16 +90,14 @@ auth({
 - TypeScript
 
 ```ts
-import spotifyToken, { UserConfig } from 'spotify-auth-token';
+import authorize, { UserConfig } from 'spotify-auth-token';
 
 const config: UserConfig = {
   clientId: 'clientId',
   clientSecret: 'clientSecret',
   port: 3000,
-  outDir: '',
-  outFileName: 'spotify-token',
   scopes: 'user-read-email',
 };
 
-spotifyToken(config);
+authorize(config);
 ```

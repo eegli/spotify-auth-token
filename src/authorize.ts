@@ -1,10 +1,10 @@
 import path from 'path';
-import { createConfig } from './create-config';
+import { createConfig } from './config';
 import { getLocalhostUrl, request } from './request';
 import type { SpotifyTokenResponse, UserConfig } from './types';
 import { goodBye, id, write } from './utils';
 
-export async function main(userConfig: UserConfig): Promise<void> {
+export async function authorize(userConfig: UserConfig): Promise<void> {
   try {
     const config = userConfig
       ? createConfig(userConfig)
@@ -65,7 +65,7 @@ export async function main(userConfig: UserConfig): Promise<void> {
       tokenRequestBody.toString()
     );
 
-    token.date_obtained = new Date().toLocaleString();
+    token.date_obtained = new Date().toUTCString();
     const outDir = path.join(process.cwd(), path.normalize(config.outDir));
     write(outDir, config.outFileName, token);
     console.info('Saved Spotify access token');

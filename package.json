@@ -15,13 +15,14 @@
     "email": "lx180777+npm@gmail.com"
   },
   "engines": {
-    "node": ">=12.11.0"
+    "node": ">=12"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/eegli/spotify-auth-token.git"
   },
   "version": "2.1.1",
+  "type": "commonjs",
   "license": "MIT",
   "bin": "cli.js",
   "main": "dist/index.js",
@@ -32,11 +33,11 @@
     "readme.md"
   ],
   "scripts": {
+    "install:ci": "yarn install --ignore-optional --frozen-lockfile",
     "dev": "tsc --watch",
     "build": "tsc --build",
     "prebuild": "rm -rf dist",
     "format": "prettier --write src",
-    "prepare": "yarn build",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"

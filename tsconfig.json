@@ -5,6 +5,7 @@
     "sourceMap": true,
     "module": "commonjs",
     "outDir": "dist",
+    "checkJs": true,
     "target": "es2015",
     "declaration": true,
     "moduleResolution": "node",
@@ -15,5 +16,5 @@
     "strictNullChecks": true,
     "skipLibCheck": true
   },
-  "include": ["index.d.ts", "src/**/*.ts"]
+  "include": ["src/**/*.ts"]
 }

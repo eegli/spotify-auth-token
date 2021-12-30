@@ -5,6 +5,7 @@ export const getLocalhostUrl = async (port: number): Promise<string> => {
   return new Promise((resolve, reject) => {
     const server = http
       .createServer((req, res) => {
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.end('You can now close this window');
         res.once('finish', () => {
           server.close();

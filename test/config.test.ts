@@ -1,12 +1,4 @@
-import { createConfig } from '../src/create-config';
-
-const exitSpy = jest
-  .spyOn(process, 'exit')
-  .mockImplementation(() => undefined as never);
-
-beforeEach(() => {
-  exitSpy.mockClear();
-});
+import { createConfig } from '../src/config';
 
 describe('createConfig, programmatic use', () => {
   [
@@ -16,7 +8,7 @@ describe('createConfig, programmatic use', () => {
       clientSecret: 'cs',
       port: 1000,
       scopes: 'scopes',
-      outDir: '/secrets',
+      outDir: 'secrets',
       outFileName: 'mytoken',
     },
   ].forEach((config, idx) => {
@@ -32,9 +24,10 @@ describe('createConfig, programmatic use', () => {
     },
   ].forEach((config, idx) => {
     it(`fails #${idx}`, () => {
-      // @ts-expect-error
-      createConfig(config);
-      expect(exitSpy).toHaveBeenCalledTimes(1);
+      expect(() => {
+        // @ts-expect-error
+        createConfig(config);
+      }).toThrow();
     });
   });
 });
@@ -54,7 +47,7 @@ describe('createConfig, cli use', () => {
       '--scopes',
       'scopes',
       '--outDir',
-      '/secrets',
+      'secrets/spotify',
       '--outFileName',
       'mytoken',
     ],
@@ -68,8 +61,9 @@ describe('createConfig, cli use', () => {
     ['--clientSecret', 'cs'],
   ].forEach((config, idx) => {
     it(`fails #${idx}`, () => {
-      createConfig(config);
-      expect(exitSpy).toHaveBeenCalledTimes(1);
+      expect(() => {
+        createConfig(config);
+      }).toThrow();
     });
   });
 });
