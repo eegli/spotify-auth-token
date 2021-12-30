@@ -1,10 +1,16 @@
-name: Node.js CI
+name: ci-unit-tests
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
-    name: CI Tests
+    name: ${{ matrix.os }}-node v${{ matrix.node }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
