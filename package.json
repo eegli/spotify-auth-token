@@ -38,6 +38,7 @@
     "build": "tsc --build",
     "prebuild": "rm -rf dist",
     "format": "prettier --write src",
+    "prepublish": "yarn build",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
