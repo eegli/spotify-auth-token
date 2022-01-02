@@ -4,7 +4,7 @@ exports[`createConfig, cli use works #0 1`] = `
 Object {
   "clientId": "111",
   "clientSecret": "111",
-  "outDir": "/usr/dir",
+  "outDir": "",
   "outFileName": "spotify-token",
   "port": 3000,
   "scopes": "user-read-email",
@@ -15,7 +15,7 @@ exports[`createConfig, cli use works #1 1`] = `
 Object {
   "clientId": "333",
   "clientSecret": "333",
-  "outDir": "/usr/dir",
+  "outDir": "",
   "outFileName": "spotify-token",
   "port": 4000,
   "scopes": "user-read-email",
@@ -26,7 +26,7 @@ exports[`createConfig, cli use works #2 1`] = `
 Object {
   "clientId": "777",
   "clientSecret": "888",
-  "outDir": "/usr/dir",
+  "outDir": "",
   "outFileName": "spotify-token",
   "port": 3000,
   "scopes": "user-read-email",
@@ -48,7 +48,7 @@ exports[`createConfig, programmatic use works #0 1`] = `
 Object {
   "clientId": "cid",
   "clientSecret": "cs",
-  "outDir": "/usr/dir",
+  "outDir": "",
   "outFileName": "spotify-token",
   "port": 3000,
   "scopes": "user-read-email",
