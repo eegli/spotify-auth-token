@@ -28,7 +28,7 @@ npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a
 | `--clientSecret` | ✅                                | Spotify client secret                                                                                   |
 | `--port`         | ❌ - default: `3000`              | Port for localhost redirect url                                                                         |
 | `--scopes`       | ❌ - default: `'user-read-email'` | [Spotify auth scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/) |
-| `--outDir`       | ❌ - default: `process.cwd()`     | Custom output directory relative to the current directory                                               |
+| `--outDir`       | ❌ - default: `""`                | Custom output directory relative to the current directory                                               |
 | `--outFileName`  | ❌ - default: `'spotify-token'`   | Custom file name for the token                                                                          |
 
 ## Programmatic

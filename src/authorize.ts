@@ -1,4 +1,3 @@
-import path from 'path';
 import { createConfig } from './config';
 import { getLocalhostUrl, request } from './request';
 import type { SpotifyTokenResponse, UserConfig } from './types';
@@ -66,9 +65,8 @@ export async function authorize(userConfig: UserConfig): Promise<void> {
     );
 
     token.date_obtained = new Date().toUTCString();
-    const outDir = path.join(process.cwd(), path.normalize(config.outDir));
-    write(outDir, config.outFileName, token);
-    console.info('Saved Spotify access token');
+    const outDir = write(config.outDir, config.outFileName, token);
+    console.info("Success! Saved Spotify access token to '%s'", outDir);
   } catch (e) {
     goodBye('Something went wrong: ' + e);
   }

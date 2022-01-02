@@ -6,7 +6,7 @@ const defaultConfig: AppConfig = {
   clientId: '',
   clientSecret: '',
   port: 3000,
-  outDir: process.cwd(),
+  outDir: '',
   outFileName: 'spotify-token',
   scopes: 'user-read-email',
 };

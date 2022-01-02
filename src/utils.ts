@@ -8,15 +8,17 @@ export function hasOwnProperty<
   return obj.hasOwnProperty(prop);
 }
 
-export function write(path: string, fileName: string, data: unknown): void {
+export function write(path: string, fileName: string, data: unknown): string {
+  path = join(process.cwd(), path);
   if (!existsSync(path)) {
     mkdirSync(path, { recursive: true });
   }
-  if (!fileName.endsWith('.json')) {
-    fileName += '.json';
+  if (fileName.endsWith('.json')) {
+    fileName = fileName.slice(0, -5);
   }
-  path = join(path, fileName);
+  path = join(path, fileName + '.json');
   writeFileSync(path, JSON.stringify(data, null, 2));
+  return path;
 }
 
 export function id(): string {
