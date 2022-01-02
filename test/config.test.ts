@@ -1,5 +1,7 @@
 import { createConfig } from '../src/config';
 
+jest.spyOn(global.console, 'error').mockImplementation(jest.fn());
+
 describe('createConfig, programmatic use', () => {
   [
     { clientId: 'cid', clientSecret: 'cs' },
@@ -25,7 +27,7 @@ describe('createConfig, programmatic use', () => {
   ].forEach((config, idx) => {
     it(`fails #${idx}`, () => {
       expect(() => {
-        // @ts-expect-error
+        // @ts-expect-error - let's throw
         createConfig(config);
       }).toThrow();
     });

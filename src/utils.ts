@@ -5,7 +5,7 @@ export function hasOwnProperty<
   T extends Record<PropertyKey, unknown>,
   K extends PropertyKey
 >(obj: T, prop: K): obj is T & Record<K, unknown> {
-  return obj.hasOwnProperty(prop);
+  return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
 export function write(path: string, fileName: string, data: unknown): string {
