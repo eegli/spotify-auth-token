@@ -5,8 +5,6 @@ exports[`Authorize with params works with config 0: auth url 1`] = `
 "
 `;
 
-exports[`Authorize with params works with config 0: out dir 1`] = `"/usr/dir/spotify-token.json"`;
-
 exports[`Authorize with params works with config 0: spotify request 1`] = `
 Object {
   "headers": Object {
@@ -19,23 +17,25 @@ Object {
 }
 `;
 
-exports[`Authorize with params works with config 0: written data 1`] = `
-Object {
-  "access_token": "BQC2fMYf9",
-  "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
-  "expires_in": 3600,
-  "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
-  "scope": "user-library-read",
-  "token_type": "Bearer",
-}
+exports[`Authorize with params works with config 0: write data 1`] = `
+Array [
+  "",
+  "spotify-token",
+  Object {
+    "access_token": "BQC2fMYf9",
+    "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
+    "expires_in": 3600,
+    "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
+    "scope": "user-library-read",
+    "token_type": "Bearer",
+  },
+]
 `;
 
 exports[`Authorize with params works with config 1: auth url 1`] = `
 "https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A59&scope=user-read-a-book
 "
 `;
-
-exports[`Authorize with params works with config 1: out dir 1`] = `"/usr/dir/out/token/token.json"`;
 
 exports[`Authorize with params works with config 1: spotify request 1`] = `
 Object {
@@ -49,23 +49,25 @@ Object {
 }
 `;
 
-exports[`Authorize with params works with config 1: written data 1`] = `
-Object {
-  "access_token": "BQC2fMYf9",
-  "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
-  "expires_in": 3600,
-  "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
-  "scope": "user-library-read",
-  "token_type": "Bearer",
-}
+exports[`Authorize with params works with config 1: write data 1`] = `
+Array [
+  "/out/token/",
+  "token",
+  Object {
+    "access_token": "BQC2fMYf9",
+    "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
+    "expires_in": 3600,
+    "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
+    "scope": "user-library-read",
+    "token_type": "Bearer",
+  },
+]
 `;
 
 exports[`Authorize with params works with config 2: auth url 1`] = `
 "https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A69&scope=scropes2
 "
 `;
-
-exports[`Authorize with params works with config 2: out dir 1`] = `"/usr/dir/out/spotify-token.json"`;
 
 exports[`Authorize with params works with config 2: spotify request 1`] = `
 Object {
@@ -79,13 +81,17 @@ Object {
 }
 `;
 
-exports[`Authorize with params works with config 2: written data 1`] = `
-Object {
-  "access_token": "BQC2fMYf9",
-  "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
-  "expires_in": 3600,
-  "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
-  "scope": "user-library-read",
-  "token_type": "Bearer",
-}
+exports[`Authorize with params works with config 2: write data 1`] = `
+Array [
+  "/out/",
+  "spotify-token.json",
+  Object {
+    "access_token": "BQC2fMYf9",
+    "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
+    "expires_in": 3600,
+    "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
+    "scope": "user-library-read",
+    "token_type": "Bearer",
+  },
+]
 `;

@@ -1,4 +1,5 @@
 jest.mock('fs');
+jest.mock('../src/request');
 
 jest
   .useFakeTimers('modern')
