@@ -20,16 +20,22 @@ The simplest way to get a token is via `npx` - no installation required.
 npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a
 ```
 
+Optional arguments example
+
+```bash
+npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a --port 8000 --scopes "user-library-read,user-top-read"
+```
+
 ### CLI options
 
-| Option           | Required                          | Description                                                                                             |
-| ---------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `--clientId`     | ✅                                | Spotify client id                                                                                       |
-| `--clientSecret` | ✅                                | Spotify client secret                                                                                   |
-| `--port`         | ❌ - default: `3000`              | Port for localhost redirect url                                                                         |
-| `--scopes`       | ❌ - default: `'user-read-email'` | [Spotify auth scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/) |
-| `--outDir`       | ❌ - default: `""`                | Custom output directory relative to the current directory                                               |
-| `--outFileName`  | ❌ - default: `'spotify-token'`   | Custom file name for the token                                                                          |
+| Option           | Required                          | Description                                                                                                              |
+| ---------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `--clientId`     | ✅                                | Spotify client id                                                                                                        |
+| `--clientSecret` | ✅                                | Spotify client secret                                                                                                    |
+| `--port`         | ❌ - default: `3000`              | Port for localhost redirect url                                                                                          |
+| `--scopes`       | ❌ - default: `'user-read-email'` | [Spotify auth scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/), comma-separated |
+| `--outDir`       | ❌ - default: `""`                | Custom output directory relative to the current directory                                                                |
+| `--outFileName`  | ❌ - default: `'spotify-token'`   | Custom file name for the token                                                                                           |
 
 ## Programmatic
 
