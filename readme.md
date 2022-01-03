@@ -1,6 +1,6 @@
 # Spotify Auth Token
 
-![npm](https://img.shields.io/npm/v/spotify-auth-token) ![GitHub top language](https://img.shields.io/github/languages/top/eegli/spotify-auth-token) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/eegli/spotify-auth-token/ci-unit-tests/main) ![npm](https://img.shields.io/npm/dt/spotify-auth-token) ![npm bundle size](https://img.shields.io/bundlephobia/min/spotify-auth-token)
+![npm](https://img.shields.io/npm/v/spotify-auth-token) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/eegli/spotify-auth-token/ci-unit-tests/main) [![codecov](https://codecov.io/gh/eegli/spotify-auth-token/branch/main/graph/badge.svg?token=2GK6L7KXTD)](https://codecov.io/gh/eegli/spotify-auth-token) ![npm bundle size](https://img.shields.io/bundlephobia/min/spotify-auth-token)
 
 ### Simple, zero-dependency implementation of Spotify's Authorization Code Flow.
 
