@@ -1,22 +1,21 @@
-import fs from 'fs';
-import path from 'path';
 import auth from '../src/index';
 import * as request from '../src/request';
 import { AppConfig } from '../src/types';
+import * as utils from '../src/utils';
 
-jest.mock('fs');
 jest.mock('../src/request');
 
-const consoleInfoSpy = jest
-  .spyOn(global.console, 'info')
-  .mockImplementation(jest.fn());
-
-const mockedFs = fs as jest.Mocked<typeof fs>;
 const mockedRequest = request as jest.Mocked<typeof request>;
 
-mockedRequest.getLocalhostUrl.mockImplementation(() => {
-  return Promise.resolve(`?code=AQDKHwNyRapw&state=ou8n1fu8n1`);
-});
+// Math.random().toString(36).slice(2) now returns "ou8n1fu8n1"
+jest.spyOn(Math, 'random').mockReturnValue(0.69);
+
+const testState = 'ou8n1fu8n1';
+
+mockedRequest.getLocalhostUrl.mockResolvedValue(
+  `?code=AQDKHwNyRapw&state=${testState}`
+);
+
 mockedRequest.request.mockResolvedValue({
   access_token: 'BQC2fMYf9',
   token_type: 'Bearer',
@@ -25,11 +24,17 @@ mockedRequest.request.mockResolvedValue({
   scope: 'user-library-read',
 });
 
+const consoleInfoSpy = jest
+  .spyOn(global.console, 'info')
+  .mockImplementation(jest.fn());
+const writeSpy = jest.spyOn(utils, 'write');
+const stringifySpy = jest.spyOn(JSON, 'stringify');
+
 afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe('App', () => {
+describe('Authorize with params', () => {
   const testConfigs: AppConfig[] = [
     {
       clientId: 'cid',
@@ -45,7 +50,7 @@ describe('App', () => {
       port: 59,
       outDir: '/out/token/',
       outFileName: 'token',
-      scopes: 'scopes1',
+      scopes: 'user-read-a-book',
     },
     {
       clientId: 'cid',
@@ -61,20 +66,45 @@ describe('App', () => {
     it(`works with config ${idx}`, async () => {
       await auth(config);
 
-      expect(consoleInfoSpy.mock.calls[1][0]).toMatchSnapshot(
-        `config ${idx}, auth url`
-      );
+      expect(consoleInfoSpy.mock.calls[1][0]).toMatchSnapshot('auth url');
       expect(mockedRequest.getLocalhostUrl).toHaveBeenCalledWith(config.port);
       expect(mockedRequest.request.mock.calls[0][0]).toMatchSnapshot(
-        `config ${idx}, spotify request`
+        'spotify request'
       );
-      const outDirPath = (
-        mockedFs.writeFileSync.mock.calls[0][0] as string
-      ).replace(/\\|\//gi, '/');
-      expect(path.parse(outDirPath)).toMatchSnapshot(`config ${idx}, out dir`);
-      expect(
-        JSON.parse(mockedFs.writeFileSync.mock.calls[0][1] as string)
-      ).toMatchSnapshot(`config ${idx}, written data`);
+
+      const outDirPath = (writeSpy.mock.results[0].value as string).replace(
+        /\\|\//gi,
+        '/'
+      );
+
+      expect(outDirPath).toMatchSnapshot(`out dir`);
+      expect(stringifySpy.mock.calls[0][0]).toMatchSnapshot('written data');
     });
+  });
+
+  it("throws if states don't match", async () => {
+    mockedRequest.getLocalhostUrl.mockResolvedValueOnce(
+      `?code=AQDKHwNyRapw&state=${testState}XXX`
+    );
+    await expect(
+      auth({ clientId: 'cid', clientSecret: 'cs' })
+    ).rejects.toThrow();
+  });
+  it('throws if no code is received', async () => {
+    mockedRequest.getLocalhostUrl.mockResolvedValueOnce(`?state=${testState}`);
+    await expect(
+      auth({ clientId: 'cid', clientSecret: 'cs' })
+    ).rejects.toThrow();
+  });
+});
+
+describe('Authorize with process.argv', () => {
+  [
+    ['', '', '--clientId', '111', '--clientSecret', '111'],
+    ['', '', '--clientId', '333', '--clientSecret', '333', '--port', '4000'],
+  ].forEach(async (args) => {
+    process.argv = args;
+    // @ts-expect-error - get args from process.argv
+    await expect(auth()).resolves.not.toThrow();
   });
 });

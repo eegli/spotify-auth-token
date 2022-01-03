@@ -1,21 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App works with config 0: config 0, auth url 1`] = `
-"https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A1&scope=scopes1%252Cscropes2
+exports[`Authorize with params works with config 0: auth url 1`] = `
+"https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=111&redirect_uri=http%3A%2F%2Flocalhost%3A3000&scope=user-read-email
 "
 `;
 
-exports[`App works with config 0: config 0, out dir 1`] = `
+exports[`Authorize with params works with config 0: out dir 1`] = `"/usr/dir/spotify-token.json"`;
+
+exports[`Authorize with params works with config 0: spotify request 1`] = `
 Object {
-  "base": "mytoken.json",
-  "dir": "/usr/dir/out/token",
-  "ext": ".json",
-  "name": "mytoken",
-  "root": "/",
+  "headers": Object {
+    "Authorization": "Basic MTExOjExMQ==",
+    "Content-type": "application/x-www-form-urlencoded",
+  },
+  "hostname": "accounts.spotify.com",
+  "method": "POST",
+  "path": "/api/token",
 }
 `;
 
-exports[`App works with config 0: config 0, spotify request 1`] = `
+exports[`Authorize with params works with config 0: written data 1`] = `
+Object {
+  "access_token": "BQC2fMYf9",
+  "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
+  "expires_in": 3600,
+  "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
+  "scope": "user-library-read",
+  "token_type": "Bearer",
+}
+`;
+
+exports[`Authorize with params works with config 1: auth url 1`] = `
+"https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A59&scope=user-read-a-book
+"
+`;
+
+exports[`Authorize with params works with config 1: out dir 1`] = `"/usr/dir/out/token/token.json"`;
+
+exports[`Authorize with params works with config 1: spotify request 1`] = `
 Object {
   "headers": Object {
     "Authorization": "Basic Y2lkOmNz",
@@ -27,7 +49,7 @@ Object {
 }
 `;
 
-exports[`App works with config 0: config 0, written data 1`] = `
+exports[`Authorize with params works with config 1: written data 1`] = `
 Object {
   "access_token": "BQC2fMYf9",
   "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
@@ -38,60 +60,14 @@ Object {
 }
 `;
 
-exports[`App works with config 1: config 1, auth url 1`] = `
-"https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A59&scope=scopes1
-"
-`;
-
-exports[`App works with config 1: config 1, out dir 1`] = `
-Object {
-  "base": "token.json",
-  "dir": "/usr/dir/out/token",
-  "ext": ".json",
-  "name": "token",
-  "root": "/",
-}
-`;
-
-exports[`App works with config 1: config 1, spotify request 1`] = `
-Object {
-  "headers": Object {
-    "Authorization": "Basic Y2lkOmNz",
-    "Content-type": "application/x-www-form-urlencoded",
-  },
-  "hostname": "accounts.spotify.com",
-  "method": "POST",
-  "path": "/api/token",
-}
-`;
-
-exports[`App works with config 1: config 1, written data 1`] = `
-Object {
-  "access_token": "BQC2fMYf9",
-  "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
-  "expires_in": 3600,
-  "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
-  "scope": "user-library-read",
-  "token_type": "Bearer",
-}
-`;
-
-exports[`App works with config 2: config 2, auth url 1`] = `
+exports[`Authorize with params works with config 2: auth url 1`] = `
 "https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A69&scope=scropes2
 "
 `;
 
-exports[`App works with config 2: config 2, out dir 1`] = `
-Object {
-  "base": "spotify-token.json",
-  "dir": "/usr/dir/out",
-  "ext": ".json",
-  "name": "spotify-token",
-  "root": "/",
-}
-`;
+exports[`Authorize with params works with config 2: out dir 1`] = `"/usr/dir/out/spotify-token.json"`;
 
-exports[`App works with config 2: config 2, spotify request 1`] = `
+exports[`Authorize with params works with config 2: spotify request 1`] = `
 Object {
   "headers": Object {
     "Authorization": "Basic Y2lkOmNz",
@@ -103,7 +79,7 @@ Object {
 }
 `;
 
-exports[`App works with config 2: config 2, written data 1`] = `
+exports[`Authorize with params works with config 2: written data 1`] = `
 Object {
   "access_token": "BQC2fMYf9",
   "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
