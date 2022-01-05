@@ -41,6 +41,7 @@ describe('Authorize with params', () => {
       outDir: 'out/token/',
       outFileName: 'mytoken',
       scopes: 'scopes1,scropes2',
+      show: false,
     },
     {
       clientId: 'cid',
@@ -49,6 +50,7 @@ describe('Authorize with params', () => {
       outDir: '/out/token/',
       outFileName: 'token',
       scopes: 'user-read-a-book',
+      show: false,
     },
     {
       clientId: 'cid',
@@ -57,6 +59,7 @@ describe('Authorize with params', () => {
       outDir: '/out/',
       outFileName: 'spotify-token.json',
       scopes: 'scropes2',
+      show: false,
     },
   ];
 

@@ -1,6 +1,8 @@
-import { createConfig } from '../src/config';
+import { configFactory, defaultConfig } from '../src/config';
 
 jest.spyOn(global.console, 'error').mockImplementation(jest.fn());
+
+const createConfig = configFactory(defaultConfig, 'clientId', 'clientSecret');
 
 describe('createConfig, programmatic use', () => {
   [
@@ -27,7 +29,6 @@ describe('createConfig, programmatic use', () => {
   ].forEach((config, idx) => {
     it(`fails #${idx}`, () => {
       expect(() => {
-        // @ts-expect-error - let's throw
         createConfig(config);
       }).toThrow();
     });
@@ -37,7 +38,8 @@ describe('createConfig, programmatic use', () => {
 describe('createConfig, cli use', () => {
   [
     ['--clientId', '111', '--clientSecret', '111'],
-    ['--clientId', '333', '--clientSecret', '333', '--port', '4000'],
+    ['--clientId', '111', '--clientSecret', '111', '--show'],
+    ['--clientId', '333', '--clientSecret', '333', '--show', '--port', '4000'],
     ['--clientId', '777', '--clientSecret', '888', '--random', 'nothing'],
     [
       '--clientId',

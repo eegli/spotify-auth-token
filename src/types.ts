@@ -3,6 +3,7 @@ type OptionalConfig = {
   scopes: string;
   outFileName: string;
   outDir: string;
+  show: boolean;
 };
 
 type RequiredConfig = {

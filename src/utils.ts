@@ -1,22 +1,38 @@
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
-export function hasOwnProperty<
-  T extends Record<PropertyKey, unknown>,
-  K extends PropertyKey
->(obj: T, prop: K): obj is T & Record<K, unknown> {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
+export function objectFromEntries<
+  Key extends PropertyKey,
+  Entries extends Array<[Key, unknown]>
+>(
+  value: Entries
+): {
+  [K in Extract<Entries[number], [Key, unknown]>[0]]: Extract<
+    Entries[number],
+    [K, unknown]
+  >[1];
+} {
+  return Object.fromEntries(value) as {
+    [K in Extract<Entries[number], [Key, unknown]>[0]]: Extract<
+      Entries[number],
+      [K, unknown]
+    >[1];
+  };
 }
 
-export function write(path: string, fileName: string, data: unknown): string {
-  path = join(process.cwd(), path);
+export function write(
+  relativePath: string,
+  fileName: string,
+  data: unknown
+): string {
+  let path = join(process.cwd(), relativePath, fileName);
   if (!existsSync(path)) {
     mkdirSync(path, { recursive: true });
   }
-  if (fileName.endsWith('.json')) {
-    fileName = fileName.slice(0, -5);
+  if (!path.endsWith('.json')) {
+    path += '.json';
   }
-  path = join(path, fileName + '.json');
+
   writeFileSync(path, JSON.stringify(data, null, 2));
   return path;
 }

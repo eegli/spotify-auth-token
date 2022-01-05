@@ -1,7 +1,9 @@
-import { createConfig } from './config';
+import { configFactory, defaultConfig } from './config';
 import { getLocalhostUrl, request } from './request';
 import type { SpotifyTokenResponse, UserConfig } from './types';
 import { goodBye, id, write } from './utils';
+
+const createConfig = configFactory(defaultConfig, 'clientId', 'clientSecret');
 
 export async function authorize(userConfig: UserConfig): Promise<void> {
   try {
