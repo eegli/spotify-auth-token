@@ -64,7 +64,7 @@ type Options = {
   clientSecret: string;
   port?: number;
   scopes?: string;
-  outFileName?: string;
+  fileName?: string;
   outDir?: string;
 };
 ```
