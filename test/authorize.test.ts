@@ -37,7 +37,11 @@ afterEach(() => {
 describe('Authorize with params', () => {
   it('fails with missing clientId', async () => {
     // @ts-expect-error test input
-    await expect(auth({})).rejects.toThrow();
+    await expect(auth({ clientId: 'id' })).rejects.toThrow();
+  });
+  it('fails with missing clientSecret', async () => {
+    // @ts-expect-error test input
+    await expect(auth({ clientSecret: 'secret' })).rejects.toThrow();
   });
   it("fails if states don't match", async () => {
     mockRequest.getLocalhostUrl.mockResolvedValueOnce(
