@@ -11,7 +11,7 @@ Implements the authorization code flow according to the [Spotify docs](https://d
 
 This helper was mainly developed to simplify my [Spotify history scrobbler](https://github.com/eegli/spotify-history).
 
-## CLI
+## CLI Usage
 
 The simplest way to get a token is via `npx` - no installation required.
 
@@ -19,26 +19,28 @@ The simplest way to get a token is via `npx` - no installation required.
 npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a
 ```
 
-Optional arguments example
+Optional arguments example:
 
 ```bash
 npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a --port 8000 --scopes "user-library-read,user-top-read"
 ```
 
+With short flags:
+
 ```bash
 npx spotify-auth-token@latest -ci f40c6b -cs 0199f38a -p 8000 -s "user-library-read,user-top-read"
 ```
 
-### CLI usage
+### Options
 
-| Flag [, short flag]     | Required                          | Description                                                                                                              |
-| ----------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `--clientId`, `-ci`     | ✅                                | Spotify client id                                                                                                        |
-| `--clientSecret`, `-cs` | ✅                                | Spotify client secret                                                                                                    |
-| `--port`, `-p`          | ❌ - default: `3000`              | Port for localhost redirect url                                                                                          |
-| `--scopes`, `-s`        | ❌ - default: `'user-read-email'` | [Spotify auth scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/), comma-separated |
-| `--outDir`, `-o`        | ❌ - default: `""`                | Custom output directory relative to the current directory                                                                |
-| `--fileName`, `-f`      | ❌ - default: `'spotify-token'`   | Custom file name for the token                                                                                           |
+| Flag                      | **_(required?)_** Description                                                                                                                             |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-ci` \| `--clientId`     | ✅ Spotify client id                                                                                                                                      |
+| `-cs` \| `--clientSecret` | ✅ Spotify client secret                                                                                                                                  |
+| `-p` \| `--port`          | ❌ Port for localhost redirect url. Default: `3000`                                                                                                       |
+| `-s` \| `--scopes`        | ❌ [Spotify auth scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/), comma-separated. Default: `'user-read-email'` |
+| `-o` \| `--outDir`        | ❌ Custom output directory relative to the current directory                                                                                              |
+| `-f` \| `--fileName`      | ❌ Custom file name for the token                                                                                                                         |
 
 ## Programmatic
 
