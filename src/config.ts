@@ -1,46 +1,23 @@
-import { UserConfig } from './index';
+import { parserFactory } from '@eegli/tinyparse';
 import { AppConfig } from './types';
-import { goodBye, hasOwnProperty } from './utils';
 
-const defaultConfig: AppConfig = {
+export const defaultConfig: AppConfig = {
   clientId: '',
   clientSecret: '',
   port: 3000,
   outDir: '',
-  outFileName: 'spotify-token',
+  fileName: 'spotify-token',
   scopes: 'user-read-email',
 };
 
-export const createConfig = (args: UserConfig | string[]): AppConfig => {
-  const config: AppConfig = { ...defaultConfig };
-
-  // CLI use
-  if (Array.isArray(args)) {
-    args.forEach((val, idx, orig) => {
-      if (val.startsWith('--')) {
-        const key = val.slice(2);
-        if (hasOwnProperty(config, key)) {
-          config[key] = orig[idx + 1];
-        }
-      }
-    });
-
-    // Programmatic use
-  } else {
-    Object.entries(args).forEach(([key, val]) => {
-      if (hasOwnProperty(config, key)) {
-        config[key] = val;
-      }
-    });
-  }
-  if (!config.clientId || !config.clientSecret) {
-    goodBye('Error: Missing client id or client secret');
-  }
-
-  if (typeof config.port === 'string') {
-    // Convert to number
-    config.port = +config.port;
-  }
-
-  return config;
-};
+export const configParser = parserFactory(defaultConfig, {
+  required: ['clientId', 'clientSecret'],
+  shortFlags: {
+    '-ci': 'clientId',
+    '-cs': 'clientSecret',
+    '-p': 'port',
+    '-o': 'outDir',
+    '-f': 'fileName',
+    '-s': 'scopes',
+  },
+});

@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Authorize with params works with config 0: auth url 1`] = `
-"https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=111&redirect_uri=http%3A%2F%2Flocalhost%3A3000&scope=user-read-email
+"https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A1000&scope=user-do-nothing
 "
 `;
 
 exports[`Authorize with params works with config 0: spotify request 1`] = `
 Object {
   "headers": Object {
-    "Authorization": "Basic MTExOjExMQ==",
+    "Authorization": "Basic Y2lkOmNz",
     "Content-type": "application/x-www-form-urlencoded",
   },
   "hostname": "accounts.spotify.com",
@@ -19,8 +19,8 @@ Object {
 
 exports[`Authorize with params works with config 0: write data 1`] = `
 Array [
-  "",
-  "spotify-token",
+  "out/token/",
+  "mytoken",
   Object {
     "access_token": "BQC2fMYf9",
     "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",

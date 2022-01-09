@@ -26,28 +26,52 @@ const consoleSpy = jest
   .spyOn(global.console, 'info')
   .mockImplementation(jest.fn());
 
-const writeSpy = jest.spyOn(utils, 'write').mockImplementation(jest.fn());
+const writeSpy = jest
+  .spyOn(utils, 'write')
+  .mockImplementation((path) => Promise.resolve(path));
 
 afterEach(() => {
   jest.clearAllMocks();
 });
 
 describe('Authorize with params', () => {
+  it('fails with missing clientId', async () => {
+    // @ts-expect-error test input
+    await expect(auth({ clientId: 'id' })).rejects.toThrow();
+  });
+  it('fails with missing clientSecret', async () => {
+    // @ts-expect-error test input
+    await expect(auth({ clientSecret: 'secret' })).rejects.toThrow();
+  });
+  it("fails if states don't match", async () => {
+    mockRequest.getLocalhostUrl.mockResolvedValueOnce(
+      `?code=AQDKHwNyRapw&state=${testState}XXX`
+    );
+    await expect(
+      auth({ clientId: 'cid', clientSecret: 'cs' })
+    ).rejects.toThrow();
+  });
+  it('fails if no code is received', async () => {
+    mockRequest.getLocalhostUrl.mockResolvedValueOnce(`?state=${testState}`);
+    await expect(
+      auth({ clientId: 'cid', clientSecret: 'cs' })
+    ).rejects.toThrow();
+  });
   const testConfigs: AppConfig[] = [
     {
       clientId: 'cid',
       clientSecret: 'cs',
-      port: 1,
+      port: 1000,
       outDir: 'out/token/',
-      outFileName: 'mytoken',
-      scopes: 'scopes1,scropes2',
+      fileName: 'mytoken',
+      scopes: 'user-do-nothing',
     },
     {
       clientId: 'cid',
       clientSecret: 'cs',
       port: 59,
       outDir: '/out/token/',
-      outFileName: 'token',
+      fileName: 'token',
       scopes: 'user-read-a-book',
     },
     {
@@ -55,7 +79,7 @@ describe('Authorize with params', () => {
       clientSecret: 'cs',
       port: 69,
       outDir: '/out/',
-      outFileName: 'spotify-token.json',
+      fileName: 'spotify-token.json',
       scopes: 'scropes2',
     },
   ];
@@ -70,29 +94,20 @@ describe('Authorize with params', () => {
         'spotify request'
       );
       expect(writeSpy.mock.calls[0]).toMatchSnapshot('write data');
+      expect(consoleSpy.mock.calls[3][0]).toMatch(new RegExp(config.outDir));
     });
-  });
-
-  it("throws if states don't match", async () => {
-    mockRequest.getLocalhostUrl.mockResolvedValueOnce(
-      `?code=AQDKHwNyRapw&state=${testState}XXX`
-    );
-    await expect(
-      auth({ clientId: 'cid', clientSecret: 'cs' })
-    ).rejects.toThrow();
-  });
-  it('throws if no code is received', async () => {
-    mockRequest.getLocalhostUrl.mockResolvedValueOnce(`?state=${testState}`);
-    await expect(
-      auth({ clientId: 'cid', clientSecret: 'cs' })
-    ).rejects.toThrow();
   });
 });
 
 describe('Authorize with process.argv', () => {
+  it('fails with missing clientId', async () => {
+    process.argv = ['', ''];
+    // @ts-expect-error - get args from process.argv
+    await expect(auth()).rejects.toThrow();
+  });
   [
-    ['', '', '--clientId', '111', '--clientSecret', '111'],
-    ['', '', '--clientId', '333', '--clientSecret', '333', '--port', '4000'],
+    ['', '', '--clientId', '111x', '--clientSecret', '111x'],
+    ['', '', '--clientId', '333x', '--clientSecret', '333x', '--port', '4000'],
   ].forEach(async (args) => {
     process.argv = args;
     // @ts-expect-error - get args from process.argv

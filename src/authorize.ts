@@ -1,13 +1,14 @@
-import { createConfig } from './config';
+import { ValidationError } from '@eegli/tinyparse';
+import { configParser } from './config';
 import { getLocalhostUrl, request } from './request';
 import type { SpotifyTokenResponse, UserConfig } from './types';
-import { goodBye, id, write } from './utils';
+import { goodbye, id, write } from './utils';
 
 export async function authorize(userConfig: UserConfig): Promise<void> {
   try {
     const config = userConfig
-      ? createConfig(userConfig)
-      : createConfig(process.argv.slice(2));
+      ? await configParser(userConfig)
+      : await configParser(process.argv.slice(2));
 
     const redirectUri = `http://localhost:${config.port}`;
     const state = id();
@@ -32,11 +33,11 @@ export async function authorize(userConfig: UserConfig): Promise<void> {
     const receivedState = params.get('state');
 
     if (receivedState !== state) {
-      goodBye('Received and original state do not match');
+      goodbye('Received and original state do not match');
     }
 
     if (!receivedCode) {
-      goodBye('No code received');
+      goodbye('No code received');
     }
 
     console.info('Login successfull!');
@@ -65,9 +66,12 @@ export async function authorize(userConfig: UserConfig): Promise<void> {
     );
 
     token.date_obtained = new Date().toUTCString();
-    const outDir = write(config.outDir, config.outFileName, token);
-    console.info("Success! Saved Spotify access token to '%s'", outDir);
+    const outDir = await write(config.outDir, config.fileName, token);
+    console.info(`Success! Saved Spotify access token to "${outDir}"`);
   } catch (e) {
-    goodBye('Something went wrong: ' + e);
+    if (e instanceof ValidationError) {
+      goodbye(e.message);
+    }
+    goodbye('Something went wrong: ' + e);
   }
 }
