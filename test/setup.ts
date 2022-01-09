@@ -1,4 +1,14 @@
-jest.mock('fs');
+import * as utils from '../src/utils';
+
+jest.mock('fs', () => {
+  return {
+    existsSync: jest.fn(),
+    promises: {
+      mkdir: jest.fn(),
+      writeFile: jest.fn(),
+    },
+  };
+});
 jest.mock('../src/request');
 
 jest
@@ -8,8 +18,8 @@ jest
 jest.spyOn(process, 'cwd').mockImplementation(() => '/usr/dir');
 
 // For tests, throw an error instead of exiting
-jest.spyOn(process, 'exit').mockImplementation(() => {
-  throw new Error();
+jest.spyOn(utils, 'goodbye').mockImplementation((msg) => {
+  throw new Error(msg);
 });
 
 jest.spyOn(console, 'error').mockImplementation(jest.fn());

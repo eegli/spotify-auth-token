@@ -1,12 +1,11 @@
 # Spotify Auth Token
 
-![npm](https://img.shields.io/npm/v/spotify-auth-token) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/eegli/spotify-auth-token/ci-unit-tests/main) [![codecov](https://codecov.io/gh/eegli/spotify-auth-token/branch/main/graph/badge.svg?token=2GK6L7KXTD)](https://codecov.io/gh/eegli/spotify-auth-token) ![npm bundle size](https://img.shields.io/bundlephobia/min/spotify-auth-token)
+![npm](https://img.shields.io/npm/v/spotify-auth-token) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/eegli/spotify-auth-token/ci-unit-tests/main) [![codecov](https://codecov.io/gh/eegli/spotify-auth-token/branch/main/graph/badge.svg?token=2GK6L7KXTD)](https://codecov.io/gh/eegli/spotify-auth-token)
 
-### Simple, zero-dependency implementation of Spotify's Authorization Code Flow.
+### A simple and lightweight implementation of Spotify's Authorization Code Flow.
 
 - CLI and programmatic use
-- Lightweight
-- TS and ESM support
+- Customizable
 
 Implements the authorization code flow according to the [Spotify docs](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/).
 
@@ -26,16 +25,20 @@ Optional arguments example
 npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a --port 8000 --scopes "user-library-read,user-top-read"
 ```
 
-### CLI options
+```bash
+npx spotify-auth-token@latest -ci f40c6b -cs 0199f38a -p 8000 -s "user-library-read,user-top-read"
+```
 
-| Option           | Required                          | Description                                                                                                              |
-| ---------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `--clientId`     | ✅                                | Spotify client id                                                                                                        |
-| `--clientSecret` | ✅                                | Spotify client secret                                                                                                    |
-| `--port`         | ❌ - default: `3000`              | Port for localhost redirect url                                                                                          |
-| `--scopes`       | ❌ - default: `'user-read-email'` | [Spotify auth scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/), comma-separated |
-| `--outDir`       | ❌ - default: `""`                | Custom output directory relative to the current directory                                                                |
-| `--outFileName`  | ❌ - default: `'spotify-token'`   | Custom file name for the token                                                                                           |
+### CLI usage
+
+| Flag [, short flag]     | Required                          | Description                                                                                                              |
+| ----------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `--clientId`, `-ci`     | ✅                                | Spotify client id                                                                                                        |
+| `--clientSecret`, `-cs` | ✅                                | Spotify client secret                                                                                                    |
+| `--port`, `-p`          | ❌ - default: `3000`              | Port for localhost redirect url                                                                                          |
+| `--scopes`, `-s`        | ❌ - default: `'user-read-email'` | [Spotify auth scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/), comma-separated |
+| `--outDir`, `-o`        | ❌ - default: `""`                | Custom output directory relative to the current directory                                                                |
+| `--fileName`, `-f`      | ❌ - default: `'spotify-token'`   | Custom file name for the token                                                                                           |
 
 ## Programmatic
 

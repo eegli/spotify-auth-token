@@ -1,9 +1,8 @@
 type OptionalConfig = {
   port: number;
   scopes: string;
-  outFileName: string;
+  fileName: string;
   outDir: string;
-  show: boolean;
 };
 
 type RequiredConfig = {

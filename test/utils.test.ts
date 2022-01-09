@@ -1,7 +1,8 @@
 import fs from 'fs';
+import { defaultConfig } from '../src/config';
 import { write } from '../src/utils';
 
-const mockFS = fs as jest.Mocked<typeof fs>;
+const mockFS = fs.promises as jest.Mocked<typeof fs.promises>;
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -9,21 +10,22 @@ beforeEach(() => {
 
 describe('Utils', () => {
   const writeParams: Parameters<typeof write>[] = [
-    ['', 'test', { data: true }],
+    [defaultConfig.outDir, 'test', { data: true }],
     ['tmp', 'test', { data: true }],
     ['tmp/dir', 'test.json', { data: true }],
     ['/tmp/dir/', 'test', { data: true }],
     ['../dir', 'test.json', { data: true }],
   ];
   writeParams.forEach((args, idx) => {
-    it(`writes data, ${idx}`, () => {
-      write(...args);
-      expect(mockFS.writeFileSync).toHaveBeenCalledTimes(1);
-      const outDirPath = (
-        mockFS.writeFileSync.mock.calls[0][0] as string
-      ).replace(/\\|\//gi, '/');
-
-      expect(outDirPath).toMatchSnapshot(`write file, ${idx}`);
+    it(`writes data, ${idx}`, async () => {
+      const path = await write(...args);
+      expect(mockFS.writeFile).toHaveBeenCalledWith(
+        path,
+        JSON.stringify(args[2], null, 2)
+      );
+      expect(mockFS.writeFile).toHaveBeenCalledTimes(1);
+      const cleanPath = path.replace(/\\|\//gi, '/');
+      expect(cleanPath).toMatchSnapshot(`file ${idx}`);
     });
   });
 });
