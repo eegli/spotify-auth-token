@@ -1,12 +1,10 @@
 import { ValidationError } from '@eegli/tinyparse';
 import { configParser } from './config';
 import { getLocalhostUrl, request } from './request';
-import type { SpotifyTokenResponse, UserConfig } from './types';
+import type { AuthFunction, SpotifyTokenResponse } from './types';
 import { goodbye, id, write } from './utils';
 
-export async function authorize(
-  userConfig: UserConfig
-): Promise<SpotifyTokenResponse | undefined> {
+export const authorize: AuthFunction = async (userConfig) => {
   try {
     const config = userConfig
       ? await configParser(userConfig)
@@ -69,17 +67,16 @@ export async function authorize(
 
     token.date_obtained = new Date().toUTCString();
 
-    if (config.noEmit) {
-      console.info('Success!');
-      return token;
-    } else {
+    if (!config.noEmit) {
       const outDir = await write(config.outDir, config.fileName, token);
       console.info(`Success! Saved Spotify access token to "${outDir}"`);
     }
+
+    return token;
   } catch (e) {
     if (e instanceof ValidationError) {
       goodbye(e.message);
     }
     goodbye('Something went wrong: ' + e);
   }
-}
+};
