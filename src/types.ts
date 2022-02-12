@@ -11,6 +11,10 @@ type RequiredConfig = {
   clientSecret: string;
 };
 
+export type AuthFunction<T extends UserConfig = UserConfig> = (
+  config: T
+) => Promise<SpotifyTokenResponse>;
+
 export type UserConfig = RequiredConfig & Partial<OptionalConfig>;
 export type AppConfig = RequiredConfig & OptionalConfig;
 

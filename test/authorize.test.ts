@@ -70,7 +70,7 @@ describe('Authorize with params', () => {
       scopes: 'user-do-nothing',
     };
     const result = await auth(config);
-    expect(result).toBeUndefined();
+    expect(result).toBeDefined();
     expect(consoleSpy.mock.calls[1][0]).toMatchSnapshot('auth url');
     expect(mockRequest.getLocalhostUrl).toHaveBeenCalledWith(config.port);
     expect(mockRequest.request.mock.calls[0][0]).toMatchSnapshot(
