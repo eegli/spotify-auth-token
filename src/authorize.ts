@@ -4,7 +4,9 @@ import { getLocalhostUrl, request } from './request';
 import type { SpotifyTokenResponse, UserConfig } from './types';
 import { goodbye, id, write } from './utils';
 
-export async function authorize(userConfig: UserConfig): Promise<void> {
+export async function authorize(
+  userConfig: UserConfig
+): Promise<SpotifyTokenResponse | undefined> {
   try {
     const config = userConfig
       ? await configParser(userConfig)
@@ -66,8 +68,13 @@ export async function authorize(userConfig: UserConfig): Promise<void> {
     );
 
     token.date_obtained = new Date().toUTCString();
-    const outDir = await write(config.outDir, config.fileName, token);
-    console.info(`Success! Saved Spotify access token to "${outDir}"`);
+
+    if (config.noEmit) {
+      return token;
+    } else {
+      const outDir = await write(config.outDir, config.fileName, token);
+      console.info(`Success! Saved Spotify access token to "${outDir}"`);
+    }
   } catch (e) {
     if (e instanceof ValidationError) {
       goodbye(e.message);

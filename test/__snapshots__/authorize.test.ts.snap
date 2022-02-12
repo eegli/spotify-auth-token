@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Authorize with params works with config 0: auth url 1`] = `
+exports[`Authorize with params works with emit mode: auth url 1`] = `
 "https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A1000&scope=user-do-nothing
 "
 `;
 
-exports[`Authorize with params works with config 0: spotify request 1`] = `
+exports[`Authorize with params works with emit mode: spotify request 1`] = `
 Object {
   "headers": Object {
     "Authorization": "Basic Y2lkOmNz",
@@ -17,74 +17,10 @@ Object {
 }
 `;
 
-exports[`Authorize with params works with config 0: write data 1`] = `
+exports[`Authorize with params works with emit mode: write data 1`] = `
 Array [
   "out/token/",
   "mytoken",
-  Object {
-    "access_token": "BQC2fMYf9",
-    "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
-    "expires_in": 3600,
-    "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
-    "scope": "user-library-read",
-    "token_type": "Bearer",
-  },
-]
-`;
-
-exports[`Authorize with params works with config 1: auth url 1`] = `
-"https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A59&scope=user-read-a-book
-"
-`;
-
-exports[`Authorize with params works with config 1: spotify request 1`] = `
-Object {
-  "headers": Object {
-    "Authorization": "Basic Y2lkOmNz",
-    "Content-type": "application/x-www-form-urlencoded",
-  },
-  "hostname": "accounts.spotify.com",
-  "method": "POST",
-  "path": "/api/token",
-}
-`;
-
-exports[`Authorize with params works with config 1: write data 1`] = `
-Array [
-  "/out/token/",
-  "token",
-  Object {
-    "access_token": "BQC2fMYf9",
-    "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
-    "expires_in": 3600,
-    "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
-    "scope": "user-library-read",
-    "token_type": "Bearer",
-  },
-]
-`;
-
-exports[`Authorize with params works with config 2: auth url 1`] = `
-"https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A69&scope=scropes2
-"
-`;
-
-exports[`Authorize with params works with config 2: spotify request 1`] = `
-Object {
-  "headers": Object {
-    "Authorization": "Basic Y2lkOmNz",
-    "Content-type": "application/x-www-form-urlencoded",
-  },
-  "hostname": "accounts.spotify.com",
-  "method": "POST",
-  "path": "/api/token",
-}
-`;
-
-exports[`Authorize with params works with config 2: write data 1`] = `
-Array [
-  "/out/",
-  "spotify-token.json",
   Object {
     "access_token": "BQC2fMYf9",
     "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",

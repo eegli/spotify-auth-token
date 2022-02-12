@@ -5,6 +5,7 @@ export const defaultConfig: AppConfig = {
   clientId: '',
   clientSecret: '',
   port: 3000,
+  noEmit: false,
   outDir: '',
   fileName: 'spotify-token',
   scopes: 'user-read-email',
