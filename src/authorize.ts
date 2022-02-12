@@ -42,7 +42,7 @@ export async function authorize(
       goodbye('No code received');
     }
 
-    console.info('Login successfull!');
+    console.info('Login successfull! Cleaning up...\n');
 
     const tokenRequestBody = new URLSearchParams({
       grant_type: 'authorization_code',
@@ -70,6 +70,7 @@ export async function authorize(
     token.date_obtained = new Date().toUTCString();
 
     if (config.noEmit) {
+      console.info('Success!');
       return token;
     } else {
       const outDir = await write(config.outDir, config.fileName, token);
