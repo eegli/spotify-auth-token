@@ -1,6 +1,5 @@
 import auth from '../src/index';
 import * as request from '../src/request';
-import { AppConfig } from '../src/types';
 import * as utils from '../src/utils';
 
 const mockRequest = request as jest.Mocked<typeof request>;
@@ -39,10 +38,12 @@ describe('Authorize with params', () => {
     // @ts-expect-error test input
     await expect(auth({ clientId: 'id' })).rejects.toThrow();
   });
+
   it('fails with missing clientSecret', async () => {
     // @ts-expect-error test input
     await expect(auth({ clientSecret: 'secret' })).rejects.toThrow();
   });
+
   it("fails if states don't match", async () => {
     mockRequest.getLocalhostUrl.mockResolvedValueOnce(
       `?code=AQDKHwNyRapw&state=${testState}XXX`
@@ -51,51 +52,42 @@ describe('Authorize with params', () => {
       auth({ clientId: 'cid', clientSecret: 'cs' })
     ).rejects.toThrow();
   });
+
   it('fails if no code is received', async () => {
     mockRequest.getLocalhostUrl.mockResolvedValueOnce(`?state=${testState}`);
     await expect(
       auth({ clientId: 'cid', clientSecret: 'cs' })
     ).rejects.toThrow();
   });
-  const testConfigs: AppConfig[] = [
-    {
+
+  it('works with emit mode', async () => {
+    const config = {
       clientId: 'cid',
       clientSecret: 'cs',
       port: 1000,
       outDir: 'out/token/',
       fileName: 'mytoken',
       scopes: 'user-do-nothing',
-    },
-    {
+    };
+    const result = await auth(config);
+    expect(result).toBeUndefined();
+    expect(consoleSpy.mock.calls[1][0]).toMatchSnapshot('auth url');
+    expect(mockRequest.getLocalhostUrl).toHaveBeenCalledWith(config.port);
+    expect(mockRequest.request.mock.calls[0][0]).toMatchSnapshot(
+      'spotify request'
+    );
+    expect(writeSpy.mock.calls[0]).toMatchSnapshot('write data');
+    expect(consoleSpy.mock.calls[3][0]).toMatch(new RegExp(config.outDir));
+  });
+
+  it('works with no emit mode', async () => {
+    const result = await auth({
       clientId: 'cid',
       clientSecret: 'cs',
-      port: 59,
-      outDir: '/out/token/',
-      fileName: 'token',
-      scopes: 'user-read-a-book',
-    },
-    {
-      clientId: 'cid',
-      clientSecret: 'cs',
-      port: 69,
-      outDir: '/out/',
-      fileName: 'spotify-token.json',
-      scopes: 'scropes2',
-    },
-  ];
-
-  testConfigs.forEach((config, idx) => {
-    it(`works with config ${idx}`, async () => {
-      await auth(config);
-
-      expect(consoleSpy.mock.calls[1][0]).toMatchSnapshot('auth url');
-      expect(mockRequest.getLocalhostUrl).toHaveBeenCalledWith(config.port);
-      expect(mockRequest.request.mock.calls[0][0]).toMatchSnapshot(
-        'spotify request'
-      );
-      expect(writeSpy.mock.calls[0]).toMatchSnapshot('write data');
-      expect(consoleSpy.mock.calls[3][0]).toMatch(new RegExp(config.outDir));
+      noEmit: true,
     });
+    expect(result).toBeDefined();
+    expect(writeSpy).not.toHaveBeenCalled();
   });
 });
 

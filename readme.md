@@ -58,7 +58,9 @@ npm install spotify-auth-token --save-dev
 
 ### Options
 
-The options and defaults are the same as for the CLI:
+The options and defaults are the same as for the CLI plus `noEmit`. If
+`noEmit` is set to `true`, the token will be returned from the auth
+function instead of saved to the file system.
 
 ```ts
 type Options = {
@@ -68,22 +70,24 @@ type Options = {
   scopes?: string;
   fileName?: string;
   outDir?: string;
+  noEmit?: boolean;
 };
 ```
 
 ### Examples
 
-- CommonJS (with JSDoc type hints)
+- CommonJS (with JSDoc type hints) and `noEmit`
 
 ```js
 /** @type {import('spotify-auth-token').default} */
 import authorize from 'spotify-auth-token';
 
-authorize({
+const token = await authorize({
   clientId: 'clientId',
   clientSecret: 'clientSecret',
   port: 3000,
   scopes: 'user-read-email',
+  noEmit: true,
 });
 ```
 
