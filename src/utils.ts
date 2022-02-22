@@ -23,6 +23,6 @@ export function id(): string {
 }
 
 export function goodbye(message: string): never {
-  console.error('\x1b[31m', `Error: ${message}. Goodbye`, '\x1b[0m');
+  console.error('\x1b[31m', `Error: ${message}.`, '\x1b[0m');
   process.exit(1);
 }

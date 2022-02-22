@@ -12,7 +12,18 @@ export const defaultConfig: AppConfig = {
 };
 
 export const configParser = parserFactory(defaultConfig, {
-  required: ['clientId', 'clientSecret'],
+  required: [
+    {
+      argName: 'clientId',
+      errorMessage:
+        'Please specify your Spotify client id.\nFor more info, visit https://github.com/eegli/spotify-auth-token',
+    },
+    {
+      argName: 'clientSecret',
+      errorMessage:
+        'Please specify your Spotify client secret.\nFor more info, visit https://github.com/eegli/spotify-auth-token',
+    },
+  ],
   shortFlags: {
     '-ci': 'clientId',
     '-cs': 'clientSecret',
