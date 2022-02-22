@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Authorize with params works with emit mode: auth url 1`] = `
-"https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A1000&scope=user-do-nothing
+"https://accounts.spotify.com/authorize?response_type=code&show_dialog=true&state=ou8n1fu8n1&client_id=cid&redirect_uri=http%3A%2F%2Flocalhost%3A1000&scope=user-do-nothing+user-balabla
 "
 `;
 
@@ -26,7 +26,7 @@ Array [
     "date_obtained": "Sat, 20 Apr 1996 22:00:00 GMT",
     "expires_in": 3600,
     "refresh_token": "OFuVRQAzVzq0Wy_Py_W4KiMr8H0",
-    "scope": "user-library-read",
+    "scope": "user-library-read user-top-read",
     "token_type": "Bearer",
   },
 ]
