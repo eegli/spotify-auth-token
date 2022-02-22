@@ -79,7 +79,7 @@ type Options = {
 - CommonJS
 
 ```js
-const authorize = require('spotify-auth-token').default;
+const { authorize } = require('spotify-auth-token/dist/authorize');
 
 const token = await authorize({
   clientId: 'clientId',
