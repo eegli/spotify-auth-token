@@ -76,11 +76,10 @@ type Options = {
 
 ### Examples
 
-- CommonJS (with JSDoc type hints)
+- CommonJS
 
 ```js
-/** @type {import('spotify-auth-token').default} */
-import authorize from 'spotify-auth-token';
+const authorize = require('spotify-auth-token').default;
 
 const token = await authorize({
   clientId: 'clientId',
