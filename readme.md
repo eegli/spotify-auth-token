@@ -22,25 +22,25 @@ npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a
 Optional arguments example:
 
 ```bash
-npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a --port 8000 --scopes "user-library-read,user-top-read"
+npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a --port 8000 --scopes "user-library-read"
 ```
 
 With short flags:
 
 ```bash
-npx spotify-auth-token@latest -ci f40c6b -cs 0199f38a -p 8000 -s "user-library-read,user-top-read"
+npx spotify-auth-token@latest -ci f40c6b -cs 0199f38a -p 8000 -s "user-library-read user-top-read"
 ```
 
 ### Options
 
-| Flag                      | **_(required?)_** Description                                                                                                                             |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-ci` \| `--clientId`     | ✅ Spotify client id                                                                                                                                      |
-| `-cs` \| `--clientSecret` | ✅ Spotify client secret                                                                                                                                  |
-| `-p` \| `--port`          | ❌ Port for localhost redirect url. Default: `3000`                                                                                                       |
-| `-s` \| `--scopes`        | ❌ [Spotify auth scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/), comma-separated. Default: `'user-read-email'` |
-| `-o` \| `--outDir`        | ❌ Custom output directory relative to the current directory                                                                                              |
-| `-f` \| `--fileName`      | ❌ Custom file name for the token                                                                                                                         |
+| Flag                      | **_(required?)_** Description                                                                                                                                  |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-ci` \| `--clientId`     | ✅ Spotify client id                                                                                                                                           |
+| `-cs` \| `--clientSecret` | ✅ Spotify client secret                                                                                                                                       |
+| `-p` \| `--port`          | ❌ Port for localhost redirect url. Default: `3000`                                                                                                            |
+| `-s` \| `--scopes`        | ❌ [Spotify auth scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/), separated by a space. Default: `'user-read-email'` |
+| `-o` \| `--outDir`        | ❌ Custom output directory relative to the current directory                                                                                                   |
+| `-f` \| `--fileName`      | ❌ Custom file name for the token                                                                                                                              |
 
 ## Programmatic
 
@@ -85,7 +85,7 @@ const token = await authorize({
   clientId: 'clientId',
   clientSecret: 'clientSecret',
   port: 3000,
-  scopes: 'user-read-email',
+  scopes: 'user-read-email user-top-read',
   noEmit: true,
 });
 ```
@@ -99,7 +99,7 @@ const token = await authorize({
   clientId: 'clientId',
   clientSecret: 'clientSecret',
   port: 3000,
-  scopes: 'user-read-email',
+  scopes: 'user-read-email user-top-read',
 });
 ```
 
@@ -112,7 +112,7 @@ const config: UserConfig = {
   clientId: 'clientId',
   clientSecret: 'clientSecret',
   port: 3000,
-  scopes: 'user-read-email',
+  scopes: 'user-read-email user-top-read',
 };
 
 const token = await authorize(config);

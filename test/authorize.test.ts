@@ -18,7 +18,7 @@ mockRequest.request.mockResolvedValue({
   token_type: 'Bearer',
   expires_in: 3600,
   refresh_token: 'OFuVRQAzVzq0Wy_Py_W4KiMr8H0',
-  scope: 'user-library-read',
+  scope: 'user-library-read user-top-read',
 });
 
 const consoleSpy = jest
@@ -67,7 +67,7 @@ describe('Authorize with params', () => {
       port: 1000,
       outDir: 'out/token/',
       fileName: 'mytoken',
-      scopes: 'user-do-nothing',
+      scopes: 'user-do-nothing user-balabla',
     };
     const result = await auth(config);
     expect(result).toBeDefined();

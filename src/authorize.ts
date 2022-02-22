@@ -18,10 +18,10 @@ export const authorize: AuthFunction = async (userConfig) => {
       new URLSearchParams({
         response_type: 'code',
         show_dialog: 'true',
-        state: encodeURIComponent(state),
-        client_id: encodeURIComponent(config.clientId),
+        state,
+        client_id: config.clientId,
         redirect_uri: redirectUri,
-        scope: encodeURIComponent(config.scopes),
+        scope: config.scopes,
       }).toString();
 
     console.info('Please click the link to login to Spotify in the browser\n');
