@@ -5,9 +5,6 @@ import * as utils from '../src/utils';
 
 const mockRequest = request as jest.Mocked<typeof request>;
 
-// Math.random().toString(36).slice(2) now returns "ou8n1fu8n1"
-jest.spyOn(Math, 'random').mockReturnValue(0.69);
-
 const testState = 'ou8n1fu8n1';
 
 mockRequest.getLocalhostUrl.mockResolvedValue(
