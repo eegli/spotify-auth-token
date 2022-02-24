@@ -100,9 +100,11 @@ describe('Authorize with process.argv', () => {
   [
     ['', '', '--clientId', '111x', '--clientSecret', '111x'],
     ['', '', '--clientId', '333x', '--clientSecret', '333x', '--port', '4000'],
-  ].forEach(async (args) => {
-    process.argv = args;
-    // @ts-expect-error - get args from process.argv
-    await expect(auth()).resolves.not.toThrow();
+  ].forEach((args) => {
+    it('works with args from process', async () => {
+      process.argv = args;
+      // @ts-expect-error - get args from process.argv
+      await expect(auth()).resolves.not.toThrow();
+    });
   });
 });

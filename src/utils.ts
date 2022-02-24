@@ -6,14 +6,13 @@ export async function write(
   fileName: string,
   data: unknown
 ): Promise<string> {
-  path = join(process.cwd(), path);
+  if (!fileName.endsWith('.json')) {
+    fileName += '.json';
+  }
+  path = join(process.cwd(), path, fileName);
   if (!existsSync(path)) {
     await fs.mkdir(path, { recursive: true });
   }
-  if (fileName.endsWith('.json')) {
-    fileName = fileName.slice(0, -5);
-  }
-  path = join(path, fileName + '.json');
   await fs.writeFile(path, JSON.stringify(data, null, 2));
   return path;
 }
@@ -22,7 +21,19 @@ export function id(): string {
   return Math.random().toString(36).slice(2);
 }
 
-export function goodbye(message: string): never {
-  console.error('\x1b[31m', `Error: ${message}.`, '\x1b[0m');
+// https://github.com/sindresorhus/yoctocolors/blob/main/index.js
+export const yellow = (msg: string) =>
+  '\u001B[' + 33 + 'm' + msg + '\u001B[' + 39 + 'm';
+
+export const red = (msg: string) =>
+  '\u001B[' + 31 + 'm' + msg + '\u001B[' + 39 + 'm';
+
+export function exit(message: string, color: 'red' | 'yellow' = 'red'): never {
+  if (color === 'red') {
+    console.error(red(message));
+  } else {
+    console.info(yellow(message));
+  }
+
   process.exit(1);
 }
