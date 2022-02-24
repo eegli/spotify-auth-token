@@ -6,10 +6,28 @@
 
 - CLI and programmatic use
 - Customizable
+- Gets both short-lived and refresh tokens
 
 Implements the authorization code flow according to the [Spotify docs](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/).
 
+Use it for any application that interacts with the Spotify API and needs to run independently. The generated refresh token can be used to request new short-lived tokens on the fly.
+
 This helper was mainly developed to simplify my [Spotify history scrobbler](https://github.com/eegli/spotify-history).
+
+## Example result
+
+The short-lived `access_token` expires after 1 hour. The `refresh_token` can be used to request new short-lived tokens whenever needed.
+
+```json
+{
+  "access_token": "BQCmqcTBlB2uVBEzLhykD9dYi",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "AQB-B_Kg3Kn5nL3ByG1hQA",
+  "scope": "user-library-read",
+  "date_obtained": "Sat, 12 Feb 2022 10:25:41 GMT"
+}
+```
 
 ## CLI Usage
 

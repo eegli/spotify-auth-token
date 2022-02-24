@@ -1,6 +1,6 @@
 {
   "name": "spotify-auth-token",
-  "description": "A simple utility for retrieving Spotify authentication tokens. Supports programmatic and CLI use",
+  "description": "A simple utility for retrieving Spotify authentication and refresh tokens. Supports programmatic and CLI use",
   "keywords": [
     "spotify",
     "auth",

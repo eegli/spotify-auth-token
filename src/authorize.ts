@@ -2,7 +2,7 @@ import { ValidationError } from '@eegli/tinyparse';
 import { configParser } from './config';
 import { getLocalhostUrl, request } from './request';
 import type { AuthFunction, SpotifyTokenResponse } from './types';
-import { goodbye, id, write } from './utils';
+import { exit, id, write } from './utils';
 
 export const authorize: AuthFunction = async (userConfig) => {
   try {
@@ -33,11 +33,11 @@ export const authorize: AuthFunction = async (userConfig) => {
     const receivedState = params.get('state');
 
     if (receivedState !== state) {
-      goodbye('Received and original state do not match');
+      exit('Received and original state do not match');
     }
 
     if (!receivedCode) {
-      goodbye('No code received');
+      exit('No code received');
     }
 
     console.info('Login successfull! Cleaning up...\n');
@@ -75,8 +75,8 @@ export const authorize: AuthFunction = async (userConfig) => {
     return token;
   } catch (e) {
     if (e instanceof ValidationError) {
-      goodbye(e.message);
+      exit(e.message);
     }
-    goodbye('Something went wrong: ' + e);
+    exit('Something went wrong: ' + e);
   }
 };

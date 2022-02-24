@@ -9,6 +9,7 @@ jest.mock('fs', () => {
     },
   };
 });
+
 jest.mock('../src/request');
 
 jest
@@ -17,8 +18,11 @@ jest
 
 jest.spyOn(process, 'cwd').mockImplementation(() => '/usr/dir');
 
+// Math.random().toString(36).slice(2) now returns "ou8n1fu8n1"
+jest.spyOn(Math, 'random').mockReturnValue(0.69);
+
 // For tests, throw an error instead of exiting
-jest.spyOn(utils, 'goodbye').mockImplementation((msg) => {
+jest.spyOn(utils, 'exit').mockImplementation((msg) => {
   throw new Error(msg);
 });
 
