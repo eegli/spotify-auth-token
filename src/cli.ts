@@ -1,7 +1,7 @@
 import { authorize } from './authorize';
 import { exit } from './utils';
 
-export const cli = () => {
+export const cli = async () => {
   if (process.argv.length < 3) {
     exit(
       `
@@ -15,6 +15,5 @@ For docs & help, visit https://github.com/eegli/spotify-auth-token.
     );
   }
 
-  // @ts-expect-error get args from process
-  authorize(null);
+  await authorize();
 };

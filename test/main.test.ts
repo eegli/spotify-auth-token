@@ -1,3 +1,4 @@
+import { cli } from '../src/cli';
 import auth from '../src/index';
 import * as request from '../src/request';
 import * as utils from '../src/utils';
@@ -34,12 +35,9 @@ afterEach(() => {
 });
 
 describe('Authorize with params', () => {
-  it('fails with missing clientId', async () => {
+  it('fails with missing required args', async () => {
     // @ts-expect-error test input
     await expect(auth({ clientId: 'id' })).rejects.toThrow();
-  });
-
-  it('fails with missing clientSecret', async () => {
     // @ts-expect-error test input
     await expect(auth({ clientSecret: 'secret' })).rejects.toThrow();
   });
@@ -92,19 +90,13 @@ describe('Authorize with params', () => {
 });
 
 describe('Authorize with process.argv', () => {
-  it('fails with missing clientId', async () => {
+  it('fails with missing args', async () => {
     process.argv = ['', ''];
-    // @ts-expect-error - get args from process.argv
-    await expect(auth()).rejects.toThrow();
+    await expect(cli()).rejects.toThrow();
+    await expect(cli()).rejects.toMatchSnapshot();
   });
-  [
-    ['', '', '--clientId', '111x', '--clientSecret', '111x'],
-    ['', '', '--clientId', '333x', '--clientSecret', '333x', '--port', '4000'],
-  ].forEach((args) => {
-    it('works with args from process', async () => {
-      process.argv = args;
-      // @ts-expect-error - get args from process.argv
-      await expect(auth()).resolves.not.toThrow();
-    });
+  it('works with all required args', async () => {
+    process.argv = ['', '', '--clientId', '111x', '--clientSecret', '111x'];
+    await expect(cli()).resolves.not.toThrow();
   });
 });

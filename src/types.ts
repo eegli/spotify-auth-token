@@ -12,7 +12,7 @@ type RequiredConfig = {
 };
 
 export type AuthFunction<T extends UserConfig = UserConfig> = (
-  config: T
+  config?: T
 ) => Promise<SpotifyTokenResponse>;
 
 export type UserConfig = RequiredConfig & Partial<OptionalConfig>;

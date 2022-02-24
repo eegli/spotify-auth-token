@@ -31,3 +31,13 @@ Array [
   },
 ]
 `;
+
+exports[`Authorize with process.argv fails with missing args 1`] = `
+[Error: 
+spotify-auth-token
+
+- A command line utility for generating Spotify refresh tokens.
+
+For docs & help, visit https://github.com/eegli/spotify-auth-token.
+    ]
+`;
