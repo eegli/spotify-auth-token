@@ -34,27 +34,19 @@ The short-lived `access_token` expires after 1 hour. The `refresh_token` can be 
 The simplest way to get a token is via `npx` - no installation required.
 
 ```bash
-npx spotify-auth-token --clientId f40c6b --clientSecret 0199f38a
+npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a
 ```
 
 Optional arguments example:
 
 ```bash
-npx spotify-auth-token --clientId f40c6b --clientSecret 0199f38a --port 8000 --scopes "user-library-read"
+npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a --port 8000 --scopes "user-library-read"
 ```
 
 With short flags:
 
 ```bash
-npx spotify-auth-token -ci f40c6b -cs 0199f38a -p 8000 -s "user-library-read user-top-read"
-```
-
----
-
-If you're stuck with a locally cached version, add `@latest` to the package name:
-
-```bash
-npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a
+npx spotify-auth-token@latest -ci f40c6b -cs 0199f38a -p 8000 -s "user-library-read user-top-read"
 ```
 
 ### Options
