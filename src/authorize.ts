@@ -2,7 +2,7 @@ import { ValidationError } from '@eegli/tinyparse';
 import { configParser } from './config';
 import { getLocalhostUrl, request } from './request';
 import type { AuthFunction, SpotifyTokenResponse } from './types';
-import { exit, id, write } from './utils';
+import { exit, id, writeJSON } from './utils';
 
 export const authorize: AuthFunction = async (userConfig) => {
   try {
@@ -68,7 +68,7 @@ export const authorize: AuthFunction = async (userConfig) => {
     token.date_obtained = new Date().toUTCString();
 
     if (!config.noEmit) {
-      const outDir = await write(config.outDir, config.fileName, token);
+      const outDir = await writeJSON(config.outDir, config.fileName, token);
       console.info(`Success! Saved Spotify access token to "${outDir}"`);
     }
 

@@ -1,16 +1,7 @@
 import * as utils from '../src/utils';
 
-jest.mock('fs', () => {
-  return {
-    existsSync: jest.fn(),
-    promises: {
-      mkdir: jest.fn(),
-      writeFile: jest.fn(),
-    },
-  };
-});
-
 jest.mock('../src/request');
+jest.mock('fs-extra');
 
 jest
   .useFakeTimers('modern')
