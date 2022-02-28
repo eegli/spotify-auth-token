@@ -1,7 +1,7 @@
-import { existsSync, promises as fs } from 'fs';
+import fs from 'fs-extra';
 import { join } from 'path';
 
-export async function write(
+export async function writeJSON(
   path: string,
   fileName: string,
   data: unknown
@@ -10,10 +10,7 @@ export async function write(
     fileName += '.json';
   }
   path = join(process.cwd(), path, fileName);
-  if (!existsSync(path)) {
-    await fs.mkdir(path, { recursive: true });
-  }
-  await fs.writeFile(path, JSON.stringify(data, null, 2));
+  await fs.outputFile(path, JSON.stringify(data, null, 2));
   return path;
 }
 

@@ -1,15 +1,15 @@
-import fs from 'fs';
+import fs from 'fs-extra';
 import { defaultConfig } from '../src/config';
-import { write } from '../src/utils';
+import { writeJSON } from '../src/utils';
 
-const mockFS = fs.promises as jest.Mocked<typeof fs.promises>;
+const mockFS = fs as jest.Mocked<typeof fs>;
 
 beforeEach(() => {
   jest.clearAllMocks();
 });
 
 describe('Utils', () => {
-  const writeParams: Parameters<typeof write>[] = [
+  const writeParams: Parameters<typeof writeJSON>[] = [
     [defaultConfig.outDir, 'test', { data: true }],
     ['tmp', 'test', { data: true }],
     ['tmp/dir', 'test.json', { data: true }],
@@ -18,12 +18,12 @@ describe('Utils', () => {
   ];
   writeParams.forEach((args, idx) => {
     it(`writes data, ${idx}`, async () => {
-      const path = await write(...args);
-      expect(mockFS.writeFile).toHaveBeenCalledWith(
+      const path = await writeJSON(...args);
+      expect(mockFS.outputFile).toHaveBeenCalledWith(
         path,
         JSON.stringify(args[2], null, 2)
       );
-      expect(mockFS.writeFile).toHaveBeenCalledTimes(1);
+      expect(mockFS.outputFile).toHaveBeenCalledTimes(1);
       const cleanPath = path.replace(/\\|\//gi, '/');
       expect(cleanPath).toMatchSnapshot(`file ${idx}`);
     });

@@ -24,7 +24,7 @@ const consoleSpy = jest
   .mockImplementation(jest.fn());
 
 const writeSpy = jest
-  .spyOn(utils, 'write')
+  .spyOn(utils, 'writeJSON')
   .mockImplementation((path) => Promise.resolve(path));
 
 afterEach(() => {

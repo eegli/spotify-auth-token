@@ -14,6 +14,6 @@ For docs & help, visit https://github.com/eegli/spotify-auth-token.
       'yellow'
     );
   }
-
+  // @ts-expect-error get args from process.argv
   await authorize();
 };
