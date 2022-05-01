@@ -46,7 +46,7 @@ npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a --uri 80
 With short flags:
 
 ```bash
-npx spotify-auth-token@latest -ci f40c6b -cs 0199f38a -p 8000 -s "user-library-read user-top-read"
+npx spotify-auth-token@latest -ci f40c6b -cs 0199f38a -u 8000 -s "user-library-read user-top-read"
 ```
 
 ### Options
@@ -55,7 +55,7 @@ npx spotify-auth-token@latest -ci f40c6b -cs 0199f38a -p 8000 -s "user-library-r
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `-ci` \| `--clientId`     | ✅ Spotify client id                                                                                                                                           |
 | `-cs` \| `--clientSecret` | ✅ Spotify client secret                                                                                                                                       |
-| `-p` \| `--port`          | ❌ Port for localhost redirect url. Default: `3000`                                                                                                            |
+| `-u` \| `--port`          | ❌ Redirect url. Default: `https://localhost:3000`                                                                                                            |
 | `-s` \| `--scopes`        | ❌ [Spotify auth scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/), separated by a space. Default: `'user-read-email'` |
 | `-o` \| `--outDir`        | ❌ Custom output directory relative to the current directory                                                                                                   |
 | `-f` \| `--fileName`      | ❌ Custom file name for the token                                                                                                                              |
@@ -102,7 +102,7 @@ const { authorize } = require('spotify-auth-token/dist/authorize');
 const token = await authorize({
   clientId: 'clientId',
   clientSecret: 'clientSecret',
-  port: 3000,
+  uri: "http://localhost:3000",
   scopes: 'user-read-email user-top-read',
   noEmit: true,
 });
@@ -116,7 +116,7 @@ import authorize from 'spotify-auth-token';
 const token = await authorize({
   clientId: 'clientId',
   clientSecret: 'clientSecret',
-  port: 3000,
+  uri: "http://localhost:3000",
   scopes: 'user-read-email user-top-read',
 });
 ```
@@ -129,7 +129,7 @@ import authorize, { UserConfig } from 'spotify-auth-token';
 const config: UserConfig = {
   clientId: 'clientId',
   clientSecret: 'clientSecret',
-  port: 3000,
+  uri: "http://localhost:3000",
   scopes: 'user-read-email user-top-read',
 };
 
