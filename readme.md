@@ -40,7 +40,7 @@ npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a
 Optional arguments example:
 
 ```bash
-npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a --port 8000 --scopes "user-library-read"
+npx spotify-auth-token@latest --clientId f40c6b --clientSecret 0199f38a --uri 8000 --scopes "user-library-read"
 ```
 
 With short flags:

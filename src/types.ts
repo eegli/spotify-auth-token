@@ -1,5 +1,4 @@
 type OptionalConfig = {
-  port: number;
   scopes: string;
   fileName: string;
   outDir: string;
@@ -9,6 +8,7 @@ type OptionalConfig = {
 type RequiredConfig = {
   clientId: string;
   clientSecret: string;
+  uri:string;
 };
 
 export type AuthFunction<T extends UserConfig = UserConfig> = (

@@ -10,7 +10,7 @@ export const authorize: AuthFunction = async (userConfig) => {
       ? await configParser(userConfig)
       : await configParser(process.argv.slice(2));
 
-    const redirectUri = `http://localhost:${config.port}`;
+    const redirectUri = config.uri;
     const state = id();
 
     const spotifyUrl =
@@ -26,8 +26,18 @@ export const authorize: AuthFunction = async (userConfig) => {
 
     console.info('Please click the link to login to Spotify in the browser\n');
     console.info(spotifyUrl + '\n');
-
-    const authUrl = await getLocalhostUrl(config.port);
+    if(config.uri.includes("localhost")) {
+      let port = config.uri.split(":")[1];
+    }
+    else {
+      if (!(config.uri.includes("https://") || config.uri.includes("http://"))){
+        let port = new URL(`http://${config.uri}`).port
+      }
+      else {
+        let port = new URL(config.uri).port
+      }
+    }
+    const authUrl = await getLocalhostUrl(port);
     const params = new URLSearchParams(authUrl);
     const receivedCode = params.get('code');
     const receivedState = params.get('state');

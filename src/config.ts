@@ -4,7 +4,7 @@ import { AppConfig } from './types';
 export const defaultConfig: AppConfig = {
   clientId: '',
   clientSecret: '',
-  port: 3000,
+  uri: 'http://localhost:3000',
   noEmit: false,
   outDir: '',
   fileName: 'spotify-token',
@@ -23,11 +23,16 @@ export const configParser = parserFactory(defaultConfig, {
       errorMessage:
         'Please specify your Spotify client secret.\nFor more info, visit https://github.com/eegli/spotify-auth-token',
     },
+    {
+      argName:'uri',
+      errorMessage:
+        'Please specify your Spotify redirect URL specified in the developer portal.\n For more info, visit https://github.com/eegli/spotify-auth-token'
+    }
   ],
   shortFlags: {
     '-ci': 'clientId',
     '-cs': 'clientSecret',
-    '-p': 'port',
+    '-u': 'uri',
     '-o': 'outDir',
     '-f': 'fileName',
     '-s': 'scopes',
