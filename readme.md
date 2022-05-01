@@ -55,7 +55,7 @@ npx spotify-auth-token@latest -ci f40c6b -cs 0199f38a -u 8000 -s "user-library-r
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `-ci` \| `--clientId`     | ✅ Spotify client id                                                                                                                                           |
 | `-cs` \| `--clientSecret` | ✅ Spotify client secret                                                                                                                                       |
-| `-u` \| `--port`          | ❌ Redirect url. Default: `https://localhost:3000`                                                                                                            |
+| `-u` \| `--uri`          | ❌ Redirect url. Default: `https://localhost:3000`                                                                                                            |
 | `-s` \| `--scopes`        | ❌ [Spotify auth scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/), separated by a space. Default: `'user-read-email'` |
 | `-o` \| `--outDir`        | ❌ Custom output directory relative to the current directory                                                                                                   |
 | `-f` \| `--fileName`      | ❌ Custom file name for the token                                                                                                                              |
